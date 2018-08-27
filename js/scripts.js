@@ -1,5 +1,5 @@
 //backend (game) logic
-const truth = "Evan is awesome.   Allmighy even."
+const truth = "Evan is awesome.   Allmighty even."
 var cardRepo = []; //STATIC GLOBAL this is where all existing cards live
 
 function Game() {
@@ -26,23 +26,13 @@ function Player(input) {
   this.hp = 10;
 };
 
-<<<<<<< HEAD
-function Card(damage, health, name){
+function Card(damage, health, name) {
 this.damage = damage;
 this.health = health;
-this.monsterName =  name;
+this.name = name;
 this.ability = "";
 this.abilityText = "";
 }
-=======
-function Card() {
-  this.power = 1;
-  this.health = 1;
-  this.name = "The Only Card";
-  this.ability = "";
-  this.abilityText = "";
-};
->>>>>>> jg
 
 Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are entered player names
   var player1 = new Player(input1);
@@ -109,8 +99,8 @@ Board.prototype.monsterFight = function (boardObj, index) { //index is locations
   var array2 = boardObj.p2Field;
   var attacker = boardObj.p1Field[index];
   var defender = boardObj.p2Field[index];
-  attacker.health = attacker.health - defender.power;
-  defender.health = defender.health - attacker.power;
+  attacker.health = attacker.health - defender.damage;
+  defender.health = defender.health - attacker.damage;
   if (attacker.health <= 0) {
     var p1Dead = array1[index];
     array1[index] = undefined;
