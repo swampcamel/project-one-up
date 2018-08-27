@@ -61,7 +61,7 @@ Board.prototype.drawCards = function (gameObj) {
      var drawnCard = this.p2Deck.pop();
      this.p2Hand.push(drawnCard);
    } else {
-     alert("ERROR!")
+     alert("drawCards ERROR!");
    }
 }; //does this need a .bind?
 
@@ -74,12 +74,20 @@ Card.prototype.forceDraw = function (gameObj, boardObj) {//maybe not a prototype
     var drawnCard = boardObj.p2Deck.pop();
     boardObj.p2Hand.push(drawnCard);
   } else {
-    alert("ERROR!")
+    alert("forceDraw ERROR!");
   }
 };
 
-Board.prototype.playCard = function (gameObj) {
-  gameObj
+Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
+  if (gameObj.activePlayer === 1) {
+    var playedCard = this.p1Hand.splice(handIndex, 1);
+    this.p1Field.splice(laneIndex, 0, playedCard);
+  } else if (gameObj.activePlayer === 2) {
+    var playedCard = this.p2Hand.splice(handIndex, 1);
+    this.p2Field.splice(laneIndex, 0, playedCard);
+  } else {
+    alert("playCard ERROR!");
+  }
 };
 
 Board.prototype.millCards = function () {
