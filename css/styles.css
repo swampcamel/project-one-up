@@ -1,3 +1,8 @@
+html, body {
+  height: 100%;
+  background-color: black;
+}
+
 .grid-container {
   display: grid;
   height: 100%;
@@ -42,9 +47,16 @@
   background-color: wheat;
 }
 
-html, body {
-  height: 100%;
-  background-color: black;
+#player-1-graveyard {
+  background-color: chocolate;
+  border: 2px solid black;
+  border-right-style: none;
+}
+
+#player-2-graveyard {
+  background-color: orchid;
+  border: 2px solid black;
+  border-right-style: none;
 }
 
 #player-1-deck {
@@ -53,7 +65,7 @@ html, body {
 }
 
 #player-2-deck {
-  background-color: maroon;
+  background-color: orchid;
   border: 2px solid black;
 }
 
@@ -119,8 +131,4 @@ img:active {
   float: left;
   margin-right: 14px;
   display: inline;
-}
-
-#player-2-deck {
-
 }
