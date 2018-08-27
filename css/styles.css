@@ -63,6 +63,8 @@ html, body {
   border-right-style: none;
   border-left-style: none;
   padding-left: 3%;
+  height: 100%;
+  min-height: 100%;
 }
 
 #player-2-board {
@@ -89,7 +91,8 @@ html, body {
 }
 
 .player-card {
-  margin-top: 14px;
+  margin-top: 10px;
+  margin-bottom: 5px;
   background: #ffffff url("../img/orange-card.png") no-repeat center;
   background-size: contain;
   width: 18%;
