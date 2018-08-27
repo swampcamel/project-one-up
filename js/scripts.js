@@ -25,12 +25,12 @@ function Player(input) {
   this.hp = 10;
 };
 
-function Card() {
-  this.power = 1;
-  this.health = 1;
-  this.name = "The Only Card";
-  this.ability = "";
-  this.abilityText = "";
+function Card(power, health, name){
+this.damage = damage;
+this.health = health;
+this.monsterName =  name;
+this.ability = "";
+this.abilityText = "";
 }
 
 Game.prototype.startGame(input1, input2) { //inputs 1 and 2 are entered player names
@@ -89,6 +89,9 @@ $(document).ready(function(){
     var attkDamage = $(this).attr('damage');
     var attkHealth = $(this).attr('health');
     var attkName = $(this).attr('monsterName');
+    var newMonster = new Card(attkDamage, attkHealth, attkName);
+    console.log(newMonster);
+
 // illustration alert begins
     alert("my name is " +attkName+ " my information was gathered from my html. " +attkDamage+ " is the damage i inflict, while i can inflict " +attkHealth+ "  we can quickly create these with a prototype ");
 //illustration alert ended
