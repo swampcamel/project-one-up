@@ -8,15 +8,18 @@ function Game() {
 };
 
 function Board() {
+  this.p1Deck = [];
+  this.p1Hand = [];
   this.p1Field = []; //a field is the space where cards are played
+  this.p1Graveyard = [];
+  this.p2Deck = [];
+  this.p2Hand = [];
   this.p2Field = [];
+  this.p2Graveyard = [];
 };
 
 function Player(input) {
   this.name = input;
-  this.hand = [];
-  this.deck = [];
-  this.graveyard = [];
   this.hp = 10;
 };
 
@@ -32,16 +35,37 @@ Game.prototype.startGame(input1, input2) { //inputs 1 and 2 are entered player n
   var newBoard = new Board();
 };
 
-// Board.prototype.monsterFight(cardObj1, cardObj2, board) {
-//   cardObj1.health = cardObj1.health - cardObj2.power;
-//   cardObj2.health = cardObj2.health - cardObj1.power;
-//   if (cardObj1.health <= 0) {
-//     move cardObj1 graveyard;
-//   }
-//   if (cardObj2.health <= 0) {
-//     move cardObj1 geraveyard;
-//   }
-// };
+Board.prototype.shuffleCards = function () {
+
+};
+
+Board.prototype.drawCards = function () {
+
+};
+
+Board.prototype.playCard = function () {
+
+};
+
+Board.prototype.millCards = function () {
+
+};
+
+Board.prototype.monsterFight(boardObj, index1, index2) {
+  var array1 = boardObj.p1Field;
+  var array2 = boardObj.p2Field;
+  var attacker = boardObj.p1Field[index1];
+  var defender = boardObj.p2Field[index2];
+  if (attacker.health <= 0) {
+    var p1Dead = array1.splice(index1, 1);
+    boardObj.p1Graveyard.push(p1Dead);
+  }
+  if (defender.health <= 0) {
+    var p2Dead = array2.splice(index2, 1);
+    boardObj.p2p2Graveyard.push(p2Dead);
+  }
+
+};
 
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
 
