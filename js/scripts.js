@@ -1,5 +1,7 @@
 //backend (game) logic
 
+var cardRepo = [];
+
 function Game() {
   this.players = []; //array of player objects
   this.activePlayer = 1;
@@ -8,10 +10,10 @@ function Game() {
 };
 
 function Board() {
-  this.p1Deck = [];
-  this.p1Hand = [];
+  this.p1Deck = []; //each player has a generated and shuffled deck
+  this.p1Hand = []; //hands are filled from respective decks
   this.p1Field = []; //a field is the space where cards are played
-  this.p1Graveyard = [];
+  this.p1Graveyard = []; //a graveyard is a player's discard pile
   this.p2Deck = [];
   this.p2Hand = [];
   this.p2Field = [];
@@ -26,13 +28,19 @@ function Player(input) {
 function Card() {
   this.power = 1;
   this.health = 1;
-  this.name = "";
+  this.name = "The Only Card";
+  this.ability = "";
+  this.abilityText = "";
 }
 
 Game.prototype.startGame(input1, input2) { //inputs 1 and 2 are entered player names
   var player1 = new Player(input1);
   var player2 = new Player(input2);
   var newBoard = new Board();
+};
+
+Game.prototype.buildDeck = function (array, boardObj) {
+  
 };
 
 Board.prototype.shuffleCards = function () {
@@ -58,11 +66,11 @@ Board.prototype.monsterFight(boardObj, index1, index2) {
   var defender = boardObj.p2Field[index2];
   if (attacker.health <= 0) {
     var p1Dead = array1.splice(index1, 1);
-    boardObj.p1Graveyard.push(p1Dead);
+    boardObj.p1Graveyard.shift(p1Dead);
   }
   if (defender.health <= 0) {
     var p2Dead = array2.splice(index2, 1);
-    boardObj.p2p2Graveyard.push(p2Dead);
+    boardObj.p2p2Graveyard.shift(p2Dead);
   }
 
 };
