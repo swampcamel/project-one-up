@@ -1,6 +1,6 @@
 //backend (game) logic
 
-var cardRepo = [];
+var cardRepo = []; //STATIC GLOBAL this is where all existing cards live
 
 function Game() {
   this.players = []; //array of player objects
@@ -51,7 +51,13 @@ Board.prototype.shuffleCards = function () {
 
 };
 
-Board.prototype.drawCards = function () {
+Board.prototype.drawCards = function (gameObj) {
+   // select active player
+   // draw from deck;
+   // add to hand;
+};
+
+oard.prototype.forceDraw = function () {
 
 };
 
@@ -70,11 +76,11 @@ Board.prototype.monsterFight(boardObj, index1, index2) { //indices 1 and 2 are a
   var defender = boardObj.p2Field[index2];
   if (attacker.health <= 0) {
     var p1Dead = array1.splice(index1, 1);
-    boardObj.p1Graveyard.shift(p1Dead);
+    boardObj.p1Graveyard.push(p1Dead);
   }
   if (defender.health <= 0) {
     var p2Dead = array2.splice(index2, 1);
-    boardObj.p2p2Graveyard.shift(p2Dead);
+    boardObj.p2p2Graveyard.push(p2Dead);
   }
 
 };
