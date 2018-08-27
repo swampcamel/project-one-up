@@ -94,11 +94,11 @@ Board.prototype.millCards = function () {
 
 };
 
-Board.prototype.monsterFight(boardObj, index1, index2) { //indices 1 and 2 are array locations from the player fields
+Board.prototype.monsterFight(boardObj, index) { //index is locations from the player lanes
   var array1 = boardObj.p1Field;
   var array2 = boardObj.p2Field;
-  var attacker = boardObj.p1Field[index1];
-  var defender = boardObj.p2Field[index2];
+  var attacker = boardObj.p1Field[index];
+  var defender = boardObj.p2Field[index];
   if (attacker.health <= 0) {
     var p1Dead = array1.splice(index1, 1);
     boardObj.p1Graveyard.push(p1Dead);
