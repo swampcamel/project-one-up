@@ -21,6 +21,7 @@ function Board() {
 };
 
 function Player(input) {
+  this.playerNumber = NaN;
   this.name = input;
   this.hp = 10;
 };
@@ -52,17 +53,33 @@ Board.prototype.shuffleCards = function () {
 };
 
 Board.prototype.drawCards = function (gameObj) {
-   // select active player
-   // draw from deck;
-   // add to hand;
+   if (gameObj.activePlayer === 1) {
+     var drawnCard = this.p1Deck.pop();
+     this.p1Hand.push(drawnCard);
+   }
+   else if (gameObj.activePlayer === 2) {
+     var drawnCard = this.p2Deck.pop();
+     this.p2Hand.push(drawnCard);
+   } else {
+     alert("ERROR!")
+   }
+}; //does this need a .bind?
+
+Card.prototype.forceDraw = function (gameObj, boardObj) {//maybe not a prototype?
+  if (gameObj.activePlayer === 2) {
+    var drawnCard = boardObj.p1Deck.pop();
+    boardObj.p1Hand.push(drawnCard);
+  }
+  else if (gameObj.activePlayer === 1) {
+    var drawnCard = boardObj.p2Deck.pop();
+    boardObj.p2Hand.push(drawnCard);
+  } else {
+    alert("ERROR!")
+  }
 };
 
-oard.prototype.forceDraw = function () {
-
-};
-
-Board.prototype.playCard = function () {
-
+Board.prototype.playCard = function (gameObj) {
+  gameObj
 };
 
 Board.prototype.millCards = function () {
