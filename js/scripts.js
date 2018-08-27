@@ -24,11 +24,9 @@ $(document).ready(function(){
     var attkName = $(this).attr('monsterName');
     var newMonster = new Card(attkDamage, attkHealth, attkName);
     console.log(newMonster);
-
 // illustration alert begins
     alert("my name is " +attkName+ " my information was gathered from my html. " +attkDamage+ " is the damage i inflict, while i can inflict " +attkHealth+ "  we can quickly create these with a prototype ");
 //illustration alert ended
-// $('#makeMonster').show();
 })
 
 
