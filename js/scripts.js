@@ -25,7 +25,7 @@ function Player(input) {
   this.hp = 10;
 };
 
-function Card(power, health, name){
+function Card(damage, health, name){
 this.damage = damage;
 this.health = health;
 this.monsterName =  name;
