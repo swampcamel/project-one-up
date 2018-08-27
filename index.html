@@ -12,23 +12,29 @@
 </head>
   <body>
     <div class="grid-container">
-      <div id="player-2-name">
-        <p>Player 2 Name</p>
+      <div id="player-2-info">
+        <div id="player-2-name">
+          <p>Player 2 Name</p>
+        </div>
+        <hr>
+        <div id="player-2-hp">
+          <p>Player 2 HP</p>
+          <button type="button" id="button" class="waves-effect waves-light btn">End Turn</button>
+        </div>
       </div>
-      <div id="player-1-name">
-        <p>Player 1 Name</p>
-      </div>
-      <div id="player-1-hp">
-        <p>Player 1 HP</p>
-        <button type="button" id="button">End Turn</button>
-      </div>
-      <div id="player-2-hp">
-        <p>Player 2 HP</p>
-        <button type="button" id="button">End Turn</button>
+      <div id="player-1-info">
+        <div id="player-1-name">
+          <p>Player 1 Name</p>
+        </div>
+        <hr>
+        <div id="player-1-hp">
+          <p>Player 1 HP</p>
+          <button type="button" id="button" class="waves-effect waves-light btn">End Turn</button>
+        </div>
       </div>
       <div id="player-2-hand">
         <p>Player 2 Hand</p>
-        <button type="button" id="new-game">NEW GAME</button>
+        <button type="button" id="new-game" class="waves-effect waves-light btn">NEW GAME</button>
       </div>
       <div id="player-1-hand">
         <p>Player 1 Hand</p>
@@ -38,56 +44,56 @@
           <div id="player-1-play-area" class="row">
             <div id="player-1-deck" class="col s2 p1-col">
               <p>Player 1 deck</p>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+              <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
             </div>
             <div id="player-1-board" class="col s8 p1-col">
               <div class="player-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+                <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
               </div>
               <div class="player-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+                <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
               </div>
               <div class="player-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+                <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
               </div>
               <div class="player-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+                <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
               </div>
               <div class="player-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+                <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
               </div>
             </div>
             <div id="player-1-graveyard" class="col s2 p1-col">
               <p>Player 1 Graveyard</p>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+              <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
             </div>
           </div>
           <div id="player-2-play-area" class="row">
-            <div id="player-2-graveyard" class="col s2 p1-col">
-              <p>Player 2 Graveyard</p>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+            <div id="player-2-deck" class="col s2 p2-col">
+              <p>Player 2 Deck</p>
+              <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
             </div>
             <div id="player-2-board" class="col s8 p2-col">
               <div class="player-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+                <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
               </div>
               <div class="player-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+                <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
               </div>
               <div class="player-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+                <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
               </div>
               <div class="player-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+                <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
               </div>
               <div class="player-card">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+                <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
               </div>
               <!-- <p>Player 2 board</p> -->
             </div>
-            <div id="player-2-deck" class="col s2 p2-col">
-              <p>Player 2 Deck</p>
-              <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcSp-gP7MhIkpRpU4WE2WOcF4JdpO81M-be7oKW6SDJoHkTUGZN9uA"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
+            <div id="player-2-graveyard" class="col s2 p1-col">
+              <p>Player 2 Graveyard</p>
+              <img src="img/orange-card.png"  id="monster1" monsterName="wrogroth" health="10" damage="3" class="inactive"></img>
             </div>
           </div>
         </div>

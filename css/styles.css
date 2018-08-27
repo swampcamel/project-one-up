@@ -9,27 +9,23 @@ html, body {
   grid-template-columns: 0.6fr 1.5fr 0.6fr;
   grid-template-rows: 0.85fr 2fr 0.85fr;
   grid-gap: 2px 2px;
-  grid-template-areas: "player-2-name player-2-deck player-2-hp" "play-area play-area play-area" "player-1-name player-1-deck player-1-hp";
+  grid-template-areas: "player-2-info player-2-deck player-2-deck" "play-area play-area play-area" "player-1-info player-1-deck player-1-deck";
 }
 
-#player-1-name {
-  grid-area: player-1-name;
+#player-1-info {
+  grid-area: player-1-info;
   background-color: red;
 }
 
-#player-2-name {
-   grid-area: player-2-name;
+#player-2-info {
+   grid-area: player-2-info;
    background-color: blue;
  }
 
 #player-1-hp {
-  grid-area: player-1-hp;
-  background-color: rgb(0, 200, 0);
 }
 
 #player-2-hp {
-  grid-area: player-2-hp;
-  background-color: orange;
 }
 
 #player-2-hand {
@@ -44,24 +40,20 @@ html, body {
 
 #play-area {
   grid-area: play-area;
-  background-color: wheat;
+  background-color: peachPuff;
 }
 
 #player-1-deck {
   background-color: chocolate;
-  border: 2px solid black;
+
 }
 
 #player-2-deck {
   background-color: orchid;
-  border: 2px solid black;
 }
 
 #player-1-board {
-  background-color: steelBlue;
-  border: 2px solid black;
-  border-right-style: none;
-  border-left-style: none;
+  background-color: peachPuff;
   padding-left: 3%;
   height: 100%;
   min-height: 100%;
@@ -69,20 +61,15 @@ html, body {
 
 #player-2-board {
   background-color: peachPuff;
-  border: 2px solid black;
-  border-right-style: none;
-  border-left-style: none;
   padding-left: 3%;
 }
 
 #player-1-graveyard {
   background-color: chocolate;
-  border: 2px solid black;
 }
 
 #player-2-graveyard {
   background-color: orchid;
-  border: 2px solid black;
 }
 
 #play-area-container {
@@ -91,14 +78,24 @@ html, body {
 }
 
 .player-card {
-  margin-top: 10px;
-  margin-bottom: 5px;
-  background: #ffffff url("../img/orange-card.png") no-repeat center;
-  background-size: contain;
-  width: 18%;
-  height: 270px;
-  float: left;
-  margin-right: 14px;
+  margin: 0;
+  width: 180px;
+  height: 280px;
+  position: relative;
+  display: inline-block;
+  overflow: hidden;
+}
+
+.player-card > img {
+  display: block;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  min-height: 100%;
+  min-width: 100%;
+  height: 100%;
+  width: auto;
+  transform: translate(-50%, -50%);
 }
 
 .container, .row {
