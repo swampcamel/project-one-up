@@ -39,8 +39,12 @@ Game.prototype.startGame(input1, input2) { //inputs 1 and 2 are entered player n
   var newBoard = new Board();
 };
 
+Game.prototype.fillCardRepo = function () {
+
+};
+
 Game.prototype.buildDeck = function (array, boardObj) {
-  
+
 };
 
 Board.prototype.shuffleCards = function () {
@@ -59,7 +63,7 @@ Board.prototype.millCards = function () {
 
 };
 
-Board.prototype.monsterFight(boardObj, index1, index2) {
+Board.prototype.monsterFight(boardObj, index1, index2) { //indices 1 and 2 are array locations from the player fields
   var array1 = boardObj.p1Field;
   var array2 = boardObj.p2Field;
   var attacker = boardObj.p1Field[index1];
@@ -90,6 +94,5 @@ $(document).ready(function(){
 //illustration alert ended
 // $('#makeMonster').show();
   });
-
 
 });
