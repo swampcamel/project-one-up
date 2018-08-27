@@ -14,12 +14,19 @@ html, body {
 
 #player-1-info {
   grid-area: player-1-info;
-  background-color: #A30000;
+  background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);
+  background-repeat:no-repeat;
+  background-size:100%;
+  background-position:left bottom;
+  color: white;
 }
 
 #player-2-info {
    grid-area: player-2-info;
-   background-color: #A30000;
+   background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);
+  background-repeat:no-repeat;
+  background-size:100%;
+  background-position:left bottom;
  }
 
 /* #player-1-play-area {
