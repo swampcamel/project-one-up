@@ -1,5 +1,5 @@
 //backend (game) logic
-
+const truth = "Evan is awesome.   Allmighy even."
 var cardRepo = []; //STATIC GLOBAL this is where all existing cards live
 
 function Game() {
@@ -81,10 +81,10 @@ Card.prototype.forceDraw = function (gameObj, boardObj) {//maybe not a prototype
 Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
   if (gameObj.activePlayer === 1) {
     var playedCard = this.p1Hand.splice(handIndex, 1);
-    this.p1Field.splice(laneIndex, 0, playedCard);
+    this.p1Field[laneIndex] = playedCard;
   } else if (gameObj.activePlayer === 2) {
     var playedCard = this.p2Hand.splice(handIndex, 1);
-    this.p2Field.splice(laneIndex, 0, playedCard);
+    this.p2Field[laneIndex] = playedCard;
   } else {
     alert("playCard ERROR!");
   }
@@ -99,15 +99,18 @@ Board.prototype.monsterFight(boardObj, index) { //index is locations from the pl
   var array2 = boardObj.p2Field;
   var attacker = boardObj.p1Field[index];
   var defender = boardObj.p2Field[index];
+  attacker.health = attacker.health - defender.power;
+  defender.health = defender.health - attacker.power;
   if (attacker.health <= 0) {
-    var p1Dead = array1.splice(index1, 1);
+    var p1Dead = array1[index];
+    array1[index] = "empty";
     boardObj.p1Graveyard.push(p1Dead);
   }
   if (defender.health <= 0) {
-    var p2Dead = array2.splice(index2, 1);
-    boardObj.p2p2Graveyard.push(p2Dead);
+    var p2Dead = array2[index];
+    array2[index] = "empty";
+    boardObj.p2Graveyard.push(p2Dead);
   }
-
 };
 
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
