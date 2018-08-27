@@ -14,62 +14,74 @@ html, body {
 
 #player-1-info {
   grid-area: player-1-info;
-  background-color: red;
+  background-color: #A30000;
 }
 
 #player-2-info {
    grid-area: player-2-info;
-   background-color: blue;
+   background-color: #A30000;
  }
 
-#player-1-hp {
+/* #player-1-play-area {
+
+} */
+
+#divider {
+  background-image: url("../img/fire.png");
+  background-position: center center;
+  background-repeat: repeat-x;
+  height: 30px;
+  padding-left: 10px;
+  padding-right: 10px;
+  margin-left: -10px;
+  margin-right: -10px;
 }
 
-#player-2-hp {
-}
+/* #player-2-play-area {
+
+} */
 
 #player-2-hand {
   grid-area: player-2-deck;
-  background-color: pink;
+  background-color: #FF6800;
 }
 
 #player-1-hand {
   grid-area: player-1-deck;
-  background-color: turquoise;
+  background-color: #FF6800;
 }
 
 #play-area {
   grid-area: play-area;
-  background-color: peachPuff;
+  background-color: #FD9F09;
 }
 
 #player-1-deck {
-  background-color: chocolate;
-
+  text-align: center;
 }
 
 #player-2-deck {
-  background-color: orchid;
+  text-align: center;
 }
 
 #player-1-board {
-  background-color: peachPuff;
+  background-color: #FD9F09;
   padding-left: 3%;
   height: 100%;
   min-height: 100%;
 }
 
 #player-2-board {
-  background-color: peachPuff;
+  background-color: #FD9F09;
   padding-left: 3%;
 }
 
 #player-1-graveyard {
-  background-color: chocolate;
+  text-align: center;
 }
 
 #player-2-graveyard {
-  background-color: orchid;
+  text-align: center;
 }
 
 #play-area-container {
