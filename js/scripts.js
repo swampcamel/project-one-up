@@ -32,9 +32,9 @@ function Card() {
   this.name = "The Only Card";
   this.ability = "";
   this.abilityText = "";
-}
+};
 
-Game.prototype.startGame(input1, input2) { //inputs 1 and 2 are entered player names
+Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are entered player names
   var player1 = new Player(input1);
   var player2 = new Player(input2);
   var newBoard = new Board();
@@ -94,7 +94,7 @@ Board.prototype.millCards = function () {
 
 };
 
-Board.prototype.monsterFight(boardObj, index) { //index is locations from the player lanes
+Board.prototype.monsterFight = function (boardObj, index) { //index is locations from the player lanes
   var array1 = boardObj.p1Field;
   var array2 = boardObj.p2Field;
   var attacker = boardObj.p1Field[index];
@@ -103,12 +103,12 @@ Board.prototype.monsterFight(boardObj, index) { //index is locations from the pl
   defender.health = defender.health - attacker.power;
   if (attacker.health <= 0) {
     var p1Dead = array1[index];
-    array1[index] = "empty";
+    array1[index] = undefined;
     boardObj.p1Graveyard.push(p1Dead);
   }
   if (defender.health <= 0) {
     var p2Dead = array2[index];
-    array2[index] = "empty";
+    array2[index] = undefined;
     boardObj.p2Graveyard.push(p2Dead);
   }
 };
