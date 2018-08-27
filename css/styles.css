@@ -7,46 +7,87 @@
   grid-template-areas: "player-2-name player-2-deck player-2-hp" "play-area play-area play-area" "player-1-name player-1-deck player-1-hp";
 }
 
-.player-2-name {
+#player-2-name {
    grid-area: player-2-name;
    background-color: blue;
  }
 
-.player-1-name {
+#player-1-name {
   grid-area: player-1-name;
   background-color: red;
 }
 
-.player-1-hp {
+#player-1-hp {
   grid-area: player-1-hp;
-  background-color: green;
+  background-color: rgb(0, 200, 0);
 }
 
-.player-2-hp {
+#player-2-hp {
   grid-area: player-2-hp;
   background-color: orange;
 }
 
-.player-2-deck {
+#player-2-hand {
   grid-area: player-2-deck;
+  background-color: pink;
+}
+
+#player-1-hand {
+  grid-area: player-1-deck;
+  background-color: turquoise;
+}
+
+#play-area {
+  grid-area: play-area;
+  background-color: wheat;
+}
+
+
+html, body {
+  height: 100%;
   background-color: black;
 }
 
-.player-1-deck {
-  grid-area: player-1-deck;
-  background-color: grey;
+#player-1-deck {
+  background-color: chocolate;
+  border: 2px solid black;
 }
 
-.play-area {
-  grid-area: play-area;
-  background-color:
+#player-2-deck {
+  background-color: maroon;
+  border: 2px solid black;
 }
 
-.div {
-  border: 1px solid red;
+#player-1-board {
+  background-color: steelBlue;
+  border: 2px solid black;
+  border-right-style: none;
 }
 
-html, body {
+#player-2-board {
+  background-color: peachPuff;
+  border: 2px solid black;
+  border-right-style: none;
+}
+
+#play-area-container {
+  height:100%;
+  padding: 10px;
+}
+
+.container, .row {
+  margin: 0 auto;
+  padding: 0;
+  width: 100%;
+}
+
+.row {
+  height: 50%;
+  padding-top: 10px;
+  padding-bottom: 10px;
+}
+
+.col {
   height: 100%;
 }
 .inactive {
