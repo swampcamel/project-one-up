@@ -1,5 +1,8 @@
 //backend (game) logic
 var cardRepo = [];
+var p1Deck;
+var p2Deck;
+
 function Game() {
   this.players = []; //array of player objects
   this.activePlayer = 1;
@@ -51,7 +54,6 @@ shuffleCards = function (playersDeck) {
     playersDeck[currentIndex] = playersDeck[randomIndex];
     playersDeck[randomIndex] = temporaryValue;
   };
-  console.log(playersDeck)
   return playersDeck;
 };
 Board.prototype.drawCards = function () {
@@ -83,7 +85,6 @@ $(document).ready(function(){
     var attkHealth = $(this).attr('health');
     var attkName = $(this).attr('monsterName');
     var newMonster = new Card(attkDamage, attkHealth, attkName);
-    console.log(newMonster);
     newMonster.fillCardRepo();
   });
   $("#new-game").click(function() {
@@ -94,9 +95,10 @@ $(document).ready(function(){
       somecard.fillCardRepo();
 
     }
-    p1deck = buildDeck(cardRepo);
-    p2deck = buildDeck(cardRepo);
-    console.log(p1deck);
+    var p1Deck = buildDeck(cardRepo);
+    var p2Deck = buildDeck(cardRepo);
+    console.log(p1Deck);
+    console.log("below is a shuffled deck");
     console.log(shuffleCards(cardRepo));
   });
 
