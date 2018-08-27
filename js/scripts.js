@@ -1,5 +1,4 @@
 //backend (game) logic
-const truth = "Evan is awesome.   Allmighty even."
 var cardRepo = []; //STATIC GLOBAL this is where all existing cards live
 
 function Game() {
@@ -34,15 +33,16 @@ this.ability = "";
 this.abilityText = "";
 }
 
-Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are entered player names
+Card.prototype.fillCardRepo = function () {
+  cardRepo.push(this);
+};
+
+Game.prototype.startGame= function (input1, input2) { //inputs 1 and 2 are entered player names
   var player1 = new Player(input1);
   var player2 = new Player(input2);
   var newBoard = new Board();
 };
 
-Game.prototype.fillCardRepo = function () {
-
-};
 
 Game.prototype.buildDeck = function (array, boardObj) {
 
@@ -94,6 +94,7 @@ Board.prototype.millCards = function () {
 
 };
 
+
 Board.prototype.monsterFight = function (boardObj, index) { //index is locations from the player lanes
   var array1 = boardObj.p1Field;
   var array2 = boardObj.p2Field;
@@ -125,7 +126,7 @@ $(document).ready(function(){
     var attkName = $(this).attr('monsterName');
     var newMonster = new Card(attkDamage, attkHealth, attkName);
     console.log(newMonster);
-
+    newMonster.fillCardRepo();
 // illustration alert begins
     alert("my name is " +attkName+ " my information was gathered from my html. " +attkDamage+ " is the damage i inflict, while i can inflict " +attkHealth+ "  we can quickly create these with a prototype ");
 //illustration alert ended
