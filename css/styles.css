@@ -1,0 +1,51 @@
+.grid-container {
+  display: grid;
+  height: 100%;
+  grid-template-columns: 0.6fr 1.5fr 0.6fr;
+  grid-template-rows: 0.85fr 2fr 0.85fr;
+  grid-gap: 2px 2px;
+  grid-template-areas: "player-2-name player-2-deck player-2-hp" "play-area play-area play-area" "player-1-name player-1-deck player-1-hp";
+}
+
+.player-2-name {
+   grid-area: player-2-name;
+   background-color: blue;
+ }
+
+.player-1-name {
+  grid-area: player-1-name;
+  background-color: red;
+}
+
+.player-1-hp {
+  grid-area: player-1-hp;
+  background-color: green;
+}
+
+.player-2-hp {
+  grid-area: player-2-hp;
+  background-color: orange;
+}
+
+.player-2-deck {
+  grid-area: player-2-deck;
+  background-color: black;
+}
+
+.player-1-deck {
+  grid-area: player-1-deck;
+  background-color: grey;
+}
+
+.play-area {
+  grid-area: play-area;
+  background-color:
+}
+
+.div {
+  border: 1px solid red;
+}
+
+html, body {
+  height: 100%;
+}
