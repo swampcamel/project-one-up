@@ -39,7 +39,7 @@ Game.prototype.startGame= function (input1, input2) { //inputs 1 and 2 are enter
   var newBoard = new Board();
 };
 buildDeck = function (cardRepo) {
-  var Deck = cardRepo.splice();
+  var Deck = cardRepo.slice();
   return Deck;
 };
 
@@ -93,7 +93,6 @@ $(document).ready(function(){
       var someNumber = i;
       var somecard = new Card(1, 1, someNumber);
       somecard.fillCardRepo();
-
     }
     var p1Deck = buildDeck(cardRepo);
     var p2Deck = buildDeck(cardRepo);
@@ -101,5 +100,4 @@ $(document).ready(function(){
     console.log("below is a shuffled deck");
     console.log(shuffleCards(cardRepo));
   });
-
 });
