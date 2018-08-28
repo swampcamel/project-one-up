@@ -23,12 +23,13 @@ function Player(input) {
   this.name = input;
   this.hp = 10;
 };
-function Card(damage, health, name){
+function Card(damage, health, name, flavor){
   this.damage = damage;
   this.health = health;
   this.monsterName =  name;
   this.ability = "";
   this.abilityText = "";
+  this.flavorText= flavor;
 };
 Card.prototype.fillCardRepo = function () {
   cardRepo.push(this);
@@ -84,20 +85,24 @@ $(document).ready(function(){
     var attkDamage = $(this).attr('damage');
     var attkHealth = $(this).attr('health');
     var attkName = $(this).attr('monsterName');
-    var newMonster = new Card(attkDamage, attkHealth, attkName);
+    var newMonster = new Card(attkDamage, attkHealth, attkName, 'flavortextsss');
     newMonster.fillCardRepo();
-  });
+  } ;
   $("#new-game").click(function() {
     //remove this below part when we have real cards
-    for (var i=0 ; i<=30 ; i++) {
-      var someNumber = i;
-      var somecard = new Card(1, 1, someNumber);
+      var monster3 = new Card(1, 1, 'Shub-Neggurath', 'Tentacley Speaking, your baby sucks');
+      var monster2 = new Card(1, 1, 'Kassogtha', 'When eating Humans, start with the eyelids so they have to watch');
+      var monster1 = new Card(1, 1, 'Sheograth', 'Korn was my side project');
+      var monster4 = new Card(1, 1, 'Gug', 'I smell children, I smell liver, humans humans please deliver');
+      var monster5 = new Card(1, 1, 'Azaezel', 'I going to wear you like a slipper');
+
       somecard.fillCardRepo();
     }
-    var p1Deck = buildDeck(cardRepo);
-    var p2Deck = buildDeck(cardRepo);
-    console.log(p1Deck);
-    console.log("below is a shuffled deck");
-    console.log(shuffleCards(cardRepo));
+    p1Deck = buildDeck(cardRepo);
+    p2Deck = buildDeck(cardRepo);
+    p1Deck = shuffleCards(p1Deck);
+    p2Deck = shuffleCards(p1Deck);
+
   });
+  debugger;
 });
