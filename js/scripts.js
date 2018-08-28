@@ -24,12 +24,9 @@ function Player(input) {
   this.name = input;
   this.hp = 10;
 };
-<<<<<<< HEAD
 
 function Card(damage, health, name, ability, text, flavor){
-=======
-function Card(damage, health, name, flavor){
->>>>>>> c561a028de10933ebf234fc869d86f35a96c42f2
+
   this.damage = damage;
   this.health = health;
   this.monsterName =  name;
