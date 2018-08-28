@@ -24,15 +24,18 @@ function Player(input) {
   this.name = input;
   this.hp = 10;
 };
+<<<<<<< HEAD
 
-function Card(damage, health, name, ability, text){
+function Card(damage, health, name, ability, text, flavor){
+=======
+function Card(damage, health, name, flavor){
+>>>>>>> c561a028de10933ebf234fc869d86f35a96c42f2
   this.damage = damage;
   this.health = health;
   this.monsterName =  name;
-  this.ability = ability;
-  this.abilityText = text;
-
-  cardRepo.push(this);
+  this.ability = "";
+  this.abilityText = "";
+  this.flavorText= "flavor";
 };
 
 Card.prototype.fillCardRepo = function () {
@@ -50,12 +53,14 @@ Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are ente
     forceDraw(newGame, newBoard)
   }
 
-  var monster3 = new Card(1, 1, 'Shub-Neggurath', sharedAbility, 'Tentacley Speaking, your baby sucks');
-  var monster2 = new Card(1, 1, 'Kassogtha', sharedAbility, 'When eating Humans, start with the eyelids so they have to watch');
-  var monster1 = new Card(1, 1, 'Sheograth', sharedAbility, 'Korn was my side project');
-  var monster4 = new Card(1, 1, 'Gug', sharedAbility, 'I smell children, I smell liver, humans humans please deliver');
-  var monster5 = new Card(1, 1, 'Azaezel', sharedAbility, 'I going to wear you like a slipper');
-  var monster6 = new Card(1,1, 'Parus-Hellton', sharedAbility, "That's Hawt!")
+  var monster3 = new Card(1, 1, 'Shub-Neggurath', sharedAbility, "When you play this minion, your opponent draws a card.", 'Tentacley Speaking, your baby sucks');
+  var monster2 = new Card(1, 1, 'Kassogtha', sharedAbility, "When you play this minion, your opponent draws a card.", 'When eating Humans, start with the eyelids so they have to watch');
+  var monster1 = new Card(1, 1, 'Sheograth', sharedAbility, "When you play this minion, your opponent draws a card.", 'Korn was my side project');
+  var monster4 = new Card(1, 1, 'Gug', sharedAbility, "When you play this minion, your opponent draws a card.", 'I smell children, I smell liver, humans humans please deliver');
+  var monster5 = new Card(1, 1, 'Azaezel', sharedAbility, "When you play this minion, your opponent draws a card.", 'I going to wear you like a slipper');
+  var monster6 = new Card(1,1, 'Parus-Hellton', sharedAbility, "When you play this minion, your opponent draws a card.", "That's Hawt!")
+
+  //var impCard = new Card("Imp",  function() {forceDraw(newGame, newBoard)}, "When you play this minion, your opponent draws a card.");
 
   this.board.buildDeck(cardRepo);
   this.board.shuffleCards(this.board.p1Deck);
@@ -169,4 +174,5 @@ $(document).ready(function(){
     console.log(newGame.board);
 
   });
+  debugger;
 });
