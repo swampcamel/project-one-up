@@ -23,6 +23,9 @@ html, body {
   background-image: url("../img/board-bg.png");
   background-position: center center;
   min-height: 700px;
+  padding-left: 3px;
+  padding-right: 3px;
+  text-align: center;
 }
 
 #new-game {
@@ -149,11 +152,6 @@ html, body {
 #player-2-graveyard {
   grid-area: player-2-graveyard;
   text-align: center;
-}
-
-#play-area-container {
-  height:100%;
-  padding: 10px;
 }
 
 #new-game {
