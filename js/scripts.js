@@ -66,13 +66,6 @@ Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are ente
   this.board.shuffleCards(this.board.p1Deck);
   this.board.shuffleCards(this.board.p2Deck);
 
-  var deck1 = this.board.p1Deck
-  var deck2 = this.board.p2Deck
-  var hand1 = this.board.p1Hand
-  var hand2 = this.board.p2hand
-
-
-
   var test = this.board.p1Deck.splice((this.board.p1Deck.length-4, 4));
   console.log(test);
   // this.board.p1Hand = this.board.p1Deck.splice((this.board.p1Deck.length-3, 4));
