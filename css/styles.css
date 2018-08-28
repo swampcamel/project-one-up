@@ -93,6 +93,7 @@ html, body {
 
 .board-cards {
   margin-top: 25%;
+  border: solid 1px green;
 }
 
 #p1c0 {
@@ -182,8 +183,9 @@ html, body {
 }
 
 .card-back {
-  width: 100%;
+  width: auto%;
   border-radius: 5px;
+  height: 250px;
 }
 
 .player-card > img {
@@ -203,8 +205,12 @@ html, body {
   margin: 5px;
 }
 
+.active-card {
+  border: 4px solid blue;
+}
 
-.inactive {
+
+/* .inactive {
   opacity: .3;
 }
 
@@ -214,7 +220,7 @@ img:hover {
   -webkit-backface-visibility;
 }
 /* -webkit-transform:translate3d(0,0,0); */
-img:active {
+/* img:active {
   opacity: .9;
   -webkit-backface-visibility;
-}
+} */

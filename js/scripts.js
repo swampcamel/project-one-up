@@ -164,22 +164,42 @@ Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
 //begin user interface
 $(document).ready(function(){
+
   $("img").click(function(){
     $(this).toggleClass('inactive');
   });
+
   $("#new-game").click(function() {
       var newGame = new Game();
       newGame.startGame();
       console.log(newGame.board);
-
       newGame.board.p1Hand.forEach(function(card) {
-        console.log("Hi");
-        $('#player-1-hand').prepend('<img class=\"hand-cards\" src=\"img/card-frame_180w.png\">');
+        $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180w.png\"></div>');
       });
       newGame.board.p2Hand.forEach(function(card) {
-        console.log("Hi");
-        $('#player-2-hand').prepend('<img class=\"hand-cards\" src=\"img/card-frame_180w.png\">');
+        $('#player-2-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180w.png\"></div>');
       });
-
+      $('#new-game').hide();
   });
+});
+
+$(document).on('click', '.hand-cards', function() {
+  if ($(this).hasClass("active-card")) {
+    $(this).removeClass("active-card")
+  } else {
+    $(".hand-cards").each(function() {
+      $(".hand-cards").removeClass("active-card");
+    });
+    $(this).addClass("active-card");
+  }
+});
+
+$(document).on('click', '.board-cards', function() {
+  if ($(".hand-cards").hasClass("active-card")) {
+    $(".active-card").appendTo(this);
+    $(".active-card").removeClass("active-card");
+    console.log(this);
+  } else {
+    console.log("else");
+  }
 });
