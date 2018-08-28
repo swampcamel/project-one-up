@@ -198,6 +198,11 @@ html, body {
   transform: translate(-50%, -50%);
 }
 
+.hand-cards {
+  float: left;
+  margin: 5px;
+}
+
 
 .inactive {
   opacity: .3;
