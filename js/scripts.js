@@ -41,7 +41,8 @@ Card.prototype.fillCardRepo = function () {
   cardRepo.push(this);
 };
 
-Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are entered player names
+Game.prototype.startGame = function (input1, input2) {
+  cardRepo = [];  //inputs 1 and 2 are entered player names
   var player1 = new Player(input1);
   var player2 = new Player(input2);
   this.players.push(player1);
@@ -66,7 +67,7 @@ Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are ente
   this.board.shuffleCards(this.board.p2Deck);
 
   this.board.p1Hand = this.board.p1Deck.splice((this.board.p1Deck.length-5), 4);
-  this.board.p2Hand = this.board.p2Deck.splice((this.board.p2Deck.length-5), 4);
+  this.board.p2Hand = this.board.p2Deck.splice((this.board.p2Deck.length-6), 5);
 };
 
 Board.prototype.buildDeck = function (cardRepo) {
@@ -160,7 +161,16 @@ $(document).ready(function(){
   $("#new-game").click(function() {
       var newGame = new Game();
       newGame.startGame();
-    console.log(newGame.board);
+      console.log(newGame.board);
+
+      newGame.board.p1Hand.forEach(function(card) {
+        console.log("Hi");
+        $('#player-1-hand').prepend('<img class=\"hand-cards\" src=\"img/card-frame_180w.png\">');
+      });
+      newGame.board.p2Hand.forEach(function(card) {
+        console.log("Hi");
+        $('#player-2-hand').prepend('<img class=\"hand-cards\" src=\"img/card-frame_180w.png\">');
+      });
 
   });
 });
