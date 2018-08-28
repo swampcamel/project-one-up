@@ -33,6 +33,8 @@ function Card(damage, health, name, ability, text, flavor){
   this.ability = "";
   this.abilityText = "";
   this.flavorText= "flavor";
+
+  cardRepo.push(this);
 };
 
 Card.prototype.fillCardRepo = function () {
@@ -63,17 +65,14 @@ Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are ente
   this.board.shuffleCards(this.board.p1Deck);
   this.board.shuffleCards(this.board.p2Deck);
 
-  var test = this.board.p1Deck.splice((this.board.p1Deck.length-4, 4));
-  console.log(test);
-  // this.board.p1Hand = this.board.p1Deck.splice((this.board.p1Deck.length-3, 4));
-  // this.board.p2Hand = this.board.p2Deck.splice((this.board.p2Deck.length-3, 4));
+  this.board.p1Hand = this.board.p1Deck.splice((this.board.p1Deck.length-5), 4);
+  this.board.p2Hand = this.board.p2Deck.splice((this.board.p2Deck.length-5), 4);
 };
 
 Board.prototype.buildDeck = function (cardRepo) {
   var iterations = 30 / cardRepo.length;
 
   cardRepo.forEach(function(card) {
-    console.log(this);
     for (var i = 0; i < iterations; i++) {
       this.p1Deck.push(card);
       this.p2Deck.push(card);
@@ -164,5 +163,4 @@ $(document).ready(function(){
     console.log(newGame.board);
 
   });
-  debugger;
 });
