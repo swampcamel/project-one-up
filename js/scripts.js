@@ -87,7 +87,7 @@ $(document).ready(function(){
     var attkName = $(this).attr('monsterName');
     var newMonster = new Card(attkDamage, attkHealth, attkName, 'flavortextsss');
     newMonster.fillCardRepo();
-  } ;
+  }) ;
   $("#new-game").click(function() {
     //remove this below part when we have real cards
       var monster3 = new Card(1, 1, 'Shub-Neggurath', 'Tentacley Speaking, your baby sucks');
@@ -95,14 +95,21 @@ $(document).ready(function(){
       var monster1 = new Card(1, 1, 'Sheograth', 'Korn was my side project');
       var monster4 = new Card(1, 1, 'Gug', 'I smell children, I smell liver, humans humans please deliver');
       var monster5 = new Card(1, 1, 'Azaezel', 'I going to wear you like a slipper');
+      var monster6 = new Card(1,1, 'Parus-Hellton', "That's Hawt!")
+      for (i=1;i<=6;i++){
+        for (j=0;j<5;j++) {
+          var indCard = 'monster'+i;
+          indCard.fillCardRepo();
+        }
+      }
 
-      somecard.fillCardRepo();
-    }
+
     p1Deck = buildDeck(cardRepo);
     p2Deck = buildDeck(cardRepo);
     p1Deck = shuffleCards(p1Deck);
     p2Deck = shuffleCards(p1Deck);
 
+  })
   });
   debugger;
 });
