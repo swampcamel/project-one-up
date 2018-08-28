@@ -8,6 +8,7 @@ function Game() {
   this.roundCount = 0; //just putting this in for future use
   this.board;
 };
+
 function Board() {
   this.p1Deck = []; //each player has a generated and shuffled deck
   this.p1Hand = []; //hands are filled from respective decks
@@ -18,22 +19,26 @@ function Board() {
   this.p2Field = [];
   this.p2Graveyard = [];
 };
+
 function Player(input) {
   this.name = input;
   this.hp = 10;
 };
-function Card(name, ability, text){
-  // this.damage = damage;
-  // this.health = health;
+
+function Card(damage, health, name, ability, text){
+  this.damage = damage;
+  this.health = health;
   this.monsterName =  name;
   this.ability = ability;
   this.abilityText = text;
 
   cardRepo.push(this);
 };
+
 Card.prototype.fillCardRepo = function () {
   cardRepo.push(this);
 };
+
 Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are entered player names
   var player1 = new Player(input1);
   var player2 = new Player(input2);
@@ -41,11 +46,32 @@ Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are ente
   this.players.push(player2);
   this.board = new Board();
 
-  var impCard = new Card("Imp",  function() {forceDraw(newGame, newBoard)}, "When you play this minion, your opponent draws a card.");
+  var sharedAbility = function() {
+    forceDraw(newGame, newBoard)
+  }
+
+  var monster3 = new Card(1, 1, 'Shub-Neggurath', sharedAbility, 'Tentacley Speaking, your baby sucks');
+  var monster2 = new Card(1, 1, 'Kassogtha', sharedAbility, 'When eating Humans, start with the eyelids so they have to watch');
+  var monster1 = new Card(1, 1, 'Sheograth', sharedAbility, 'Korn was my side project');
+  var monster4 = new Card(1, 1, 'Gug', sharedAbility, 'I smell children, I smell liver, humans humans please deliver');
+  var monster5 = new Card(1, 1, 'Azaezel', sharedAbility, 'I going to wear you like a slipper');
+  var monster6 = new Card(1,1, 'Parus-Hellton', sharedAbility, "That's Hawt!")
 
   this.board.buildDeck(cardRepo);
   this.board.shuffleCards(this.board.p1Deck);
   this.board.shuffleCards(this.board.p2Deck);
+
+  var deck1 = this.board.p1Deck
+  var deck2 = this.board.p2Deck
+  var hand1 = this.board.p1Hand
+  var hand2 = this.board.p2hand
+
+
+
+  var test = this.board.p1Deck.splice((this.board.p1Deck.length-4, 4));
+  console.log(test);
+  // this.board.p1Hand = this.board.p1Deck.splice((this.board.p1Deck.length-3, 4));
+  // this.board.p2Hand = this.board.p2Deck.splice((this.board.p2Deck.length-3, 4));
 };
 
 Board.prototype.buildDeck = function (cardRepo) {
@@ -58,7 +84,6 @@ Board.prototype.buildDeck = function (cardRepo) {
       this.p2Deck.push(card);
     }
   }.bind(this));
-
 };
 
 Board.prototype.shuffleCards = function (deck) {
