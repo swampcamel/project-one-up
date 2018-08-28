@@ -1,13 +1,8 @@
 html, body {
   height: 100%;
-  /* background-color: black; */
-  font-family: 'Amatic SC', cursive;
-  text-align: center;
+  background-color: black;
+  font-family: 'Cinzel', cursive;
 }
-
-/* * {
-  border: 1px solid green;
-} */
 
 .grid-container {
   display: grid;
@@ -27,36 +22,77 @@ html, body {
   grid-template-areas: "player-1-deck p1c0 p1c1 p1c2 p1c3 p1c4 player-1-graveyard" "player-2-deck p2c0 p2c1 p2c2 p2c3 p2c4 player-2-graveyard";
   background-image: url("../img/board-bg.png");
   background-position: center center;
+  min-height: 700px;
+  padding-left: 3px;
+  padding-right: 3px;
+  text-align: center;
+}
+
+#new-game {
+  display: none;
+}
+
+#end-turn {
+  margin-top: 75px;
+  text-align: center;
+}
+
+.btn {
+  font-family: 'Cinzel', cursive;
+  font-size: 20px;
 }
 
 #player-1-info {
   color: #E6A71F;
   grid-area: player-1-info;
   background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);
-   background-repeat:no-repeat; */
-   background-size:100%;
-   background-position:left bottom;
-}
-
-#player-2-info {
- color: #E6A71F;
- grid-area: player-2-info;
- background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);
   background-repeat:no-repeat; */
   background-size:100%;
   background-position:left bottom;
+  padding-left: 15px;
+}
+
+#player-2-info {
+  color: #E6A71F;
+  grid-area: player-2-info;
+  background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);
+  background-repeat:no-repeat; */
+  background-size:100%;
+  background-position:left bottom;
+  padding-left: 15px;
  }
 
 #player-1-hand {
   color: #E6A71F;
   grid-area: player-1-hand;
-  background-image: url("../img/handbg.png")
+  background-image: url("../img/handbg.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
 }
 
 #player-2-hand {
   color: #E6A71F;
   grid-area: player-2-hand;
-  background-image: url("../img/handbg2.png")
+  background-image: url("../img/handbg2.png");
+  background-repeat: no-repeat;
+  background-size: cover;
+  text-align: center;
+}
+
+.board-decks {
+  margin-top: 10%;
+}
+
+.board-decks img {
+  min-height: 315px;
+  position: relative;
+  top:0;
+  left:0;
+}
+
+.board-cards {
+  margin-top: 25%;
 }
 
 #p1c0 {
@@ -118,11 +154,6 @@ html, body {
   text-align: center;
 }
 
-#play-area-container {
-  height:100%;
-  padding: 10px;
-}
-
 #new-game {
   position: absolute;
   top: 20px;
@@ -165,6 +196,11 @@ html, body {
   height: 100%;
   width: auto;
   transform: translate(-50%, -50%);
+}
+
+.hand-cards {
+  float: left;
+  margin: 5px;
 }
 
 
