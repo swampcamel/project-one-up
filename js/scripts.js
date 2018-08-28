@@ -51,13 +51,22 @@ Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are ente
   var sharedAbility = function() {
     forceDraw(newGame, newBoard)
   }
+  var tauntAbility;
 
   var monster3 = new Card(1, 1, 'Shub-Neggurath', sharedAbility, "When you play this minion, your opponent draws a card.", 'Tentacley Speaking, your baby sucks');
   var monster2 = new Card(1, 1, 'Kassogtha', sharedAbility, "When you play this minion, your opponent draws a card.", 'When eating Humans, start with the eyelids so they have to watch');
   var monster1 = new Card(1, 1, 'Sheograth', sharedAbility, "When you play this minion, your opponent draws a card.", 'Korn was my side project');
   var monster4 = new Card(1, 1, 'Gug', sharedAbility, "When you play this minion, your opponent draws a card.", 'I smell children, I smell liver, humans humans please deliver');
-  var monster5 = new Card(1, 1, 'Azaezel', sharedAbility, "When you play this minion, your opponent draws a card.", 'I going to wear you like a slipper');
-  var monster6 = new Card(1,1, 'Parus-Hellton', sharedAbility, "When you play this minion, your opponent draws a card.", "That's Hawt!")
+  var monster5 = new Card(2, 2, 'Azaezel', sharedAbility, "When you play this minion, your opponent draws a card.", 'I going to wear you like a slipper');
+  var monster6 = new Card(2,2, 'Parus-Hellton', sharedAbility, "When you play this minion, your opponent draws a card.", "That's Hawt!")
+  var monster7 = new Card(2,4, 'Jankum-Jenkins', tauntAbility, "Taunting allows monster to block an additonal creature", "What are you doing with that wolf bat?");
+  var monster8 = new Card(2,4, 'Sir Hossius', tauntAbility, "Taunting allows monster to block an additonal creature", "No longer the life of the party");
+  var monster9 = new Card(3,4, 'Kirraxus', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For I am become death");
+  var monster10 = new Card(3,4, 'Attraxia', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "Roar?");
+  var monster11 = new Card(3,4, 'Unnamable-Spawn', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For the Angel of Death spread his wings on the blast,And breathed in the face of the foe as he passed;And the eyes of the sleepers waxed deadly and chill And their hearts but once heaved, and for ever grew still!");
+  var monster13 = new Card(3,4, 'Epthelius', bleedAbility, "Taunting allows monster to block an additonal creature", "And in thy Silence was his Sentence, And in his Soul a vain repentance, ");
+
+
 
   //var impCard = new Card("Imp",  function() {forceDraw(newGame, newBoard)}, "When you play this minion, your opponent draws a card.");
 
