@@ -93,17 +93,17 @@ html, body {
 }
 
 .board-decks img {
-  min-height: 315px;
+  min-height: 300px;
+  max-width: 200px;
   margin-right: 25px;
-
 }
 
-.board-cards {
+.board-lanes {
   margin-top: 25%;
   border: solid 1px green;
 }
 
-.board-cards img {
+.board-lanes img {
   width: 100%;
   max-width: 200px;
 }
