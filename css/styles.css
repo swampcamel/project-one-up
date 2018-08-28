@@ -1,11 +1,13 @@
 html, body {
   height: 100%;
   /* background-color: black; */
+  font-family: 'Amatic SC', cursive;
+  text-align: center;
 }
 
-*{
-    border: 1px solid red;
-}
+/* * {
+  border: 1px solid green;
+} */
 
 .grid-container {
   display: grid;
@@ -13,7 +15,7 @@ html, body {
   grid-template-columns: 0.5fr 1.5fr;
   grid-template-rows: 0.85fr 2fr 0.85fr;
   grid-gap: 1px 1px;
-  grid-template-areas: "player-1-info player-1-deck" "play-area play-area" "player-2-info player-2-deck";
+  grid-template-areas: "player-1-info player-1-hand" "play-area play-area" "player-2-info player-2-hand";
 }
 
 .play-area {
@@ -23,64 +25,81 @@ html, body {
   grid-template-rows: 1fr 1fr;
   grid-gap: 1px 1px;
   grid-template-areas: "player-1-deck p1c0 p1c1 p1c2 p1c3 p1c4 player-1-graveyard" "player-2-deck p2c0 p2c1 p2c2 p2c3 p2c4 player-2-graveyard";
+  background-image: url("../img/board-bg.png");
+  background-position: center center;
 }
 
 #player-1-info {
+  color: #E6A71F;
   grid-area: player-1-info;
-  /* background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif); */
-  background-repeat:no-repeat;
-  background-size:100%;
-  background-position:left bottom;
-  color: white;
+  background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);
+   background-repeat:no-repeat; */
+   background-size:100%;
+   background-position:left bottom;
 }
 
 #player-2-info {
+ color: #E6A71F;
  grid-area: player-2-info;
- /* background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif); */
-  background-repeat:no-repeat;
+ background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);
+  background-repeat:no-repeat; */
   background-size:100%;
   background-position:left bottom;
  }
 
 #player-1-hand {
+  color: #E6A71F;
   grid-area: player-1-hand;
   background-image: url("../img/handbg.png")
 }
 
 #player-2-hand {
+  color: #E6A71F;
   grid-area: player-2-hand;
   background-image: url("../img/handbg2.png")
 }
 
-#play-area {
-  grid-area: play-area;
-  /* background-image: url("../img/board-bg.png"); */
-  background-position: center center;
+#p1c0 {
+  grid-area: p1c0;
 }
 
-#p1c0 { grid-area: p1c0; }
+#p1c1 {
+  grid-area: p1c1;
+}
 
-#p1c1 { grid-area: p1c1; }
+#p1c2 {
+  grid-area: p1c2;
+}
 
-#p1c2 { grid-area: p1c2; }
+#p1c3 {
+  grid-area: p1c3;
+}
 
-#p1c3 { grid-area: p1c3; }
+#p1c4 {
+  grid-area: p1c4;
+}
 
-#p1c4 { grid-area: p1c4; }
+#p2c0 {
+  grid-area: p2c0;
+}
 
-#p2c0 { grid-area: p2c0; }
+#p2c1 {
+  grid-area: p2c1;
+}
 
-#p2c1 { grid-area: p2c1; }
+#p2c2 {
+  grid-area: p2c2;
+}
 
-#p2c2 { grid-area: p2c2; }
+#p2c3 {
+  grid-area: p2c3;
+}
 
-#p2c3 { grid-area: p2c3; }
-
-#p2c4 { grid-area: p2c4; }
-
+#p2c4 {
+  grid-area: p2c4;
+}
 
 #player-1-deck {
-  text-align: center;
   grid-area: player-1-deck;
 }
 
@@ -88,18 +107,6 @@ html, body {
   text-align: center;
   grid-area: player-2-deck;
 }
-
-/* #player-1-board {
-
-  padding-left: 3%;
-  height: 100%;
-  min-height: 100%;
-}
-
-#player-2-board {
-
-  padding-left: 3%;
-} */
 
 #player-1-graveyard {
   grid-area: player-1-graveyard;
@@ -143,13 +150,9 @@ html, body {
   border-radius: 100px;
 }
 
-.player-card {
-  margin: 0;
-  width: 180px;
-  height: 264px;
-  position: relative;
-  display: inline-block;
-  overflow: hidden;
+.card-back {
+  width: 100%;
+  border-radius: 5px;
 }
 
 .player-card > img {
@@ -164,37 +167,11 @@ html, body {
   transform: translate(-50%, -50%);
 }
 
-.container, .row {
-  margin: 0 auto;
-  padding: 0;
-  width: 100%;
-  max-width: 100%;
-}
-
-.row {
-  height: 50%;
-  padding-top: 10px;
-  padding-bottom: 10px;
-}
-
-.col {
-  height: 100%;
-  min-height: 100%;
-}
 
 .inactive {
   opacity: .3;
 }
 
-.player-card img {
-  width: 100%;
-  height: 100%;
-}
-
-#player-1-deck img, #player-2-deck img, #player-1-graveyard img, #player-2-graveyard img {
-  width: 100%;
-  height: auto;
-}
 
 img:hover {
   opacity: .5;
