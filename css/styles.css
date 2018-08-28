@@ -4,9 +4,9 @@ html, body {
   font-family: 'Cinzel', cursive;
 }
 
-/* *{
+*{
   border: 1px solid green;
-} */
+}
 
 .grid-container {
   display: grid;
@@ -74,6 +74,10 @@ html, body {
   background-size: cover;
 }
 
+#player-1-hand img {
+
+}
+
 #player-2-hand {
   color: #E6A71F;
   grid-area: player-2-hand;
@@ -90,9 +94,8 @@ html, body {
 
 .board-decks img {
   min-height: 315px;
-  position: relative;
-  top:0;
-  left:0;
+  margin-right: 25px;
+
 }
 
 .board-cards {
@@ -146,6 +149,7 @@ html, body {
 
 #player-1-deck {
   grid-area: player-1-deck;
+
 }
 
 #player-2-deck {
