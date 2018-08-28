@@ -1,13 +1,12 @@
 //backend (game) logic
 var cardRepo = [];
-var p1Deck;
-var p2Deck;
 
 function Game() {
   this.players = []; //array of player objects
   this.activePlayer = 1;
   this.winner = "";
   this.roundCount = 0; //just putting this in for future use
+  this.board;
 };
 function Board() {
   this.p1Deck = []; //each player has a generated and shuffled deck
@@ -23,81 +22,126 @@ function Player(input) {
   this.name = input;
   this.hp = 10;
 };
-function Card(damage, health, name){
-  this.damage = damage;
-  this.health = health;
+function Card(name, ability, text){
+  // this.damage = damage;
+  // this.health = health;
   this.monsterName =  name;
-  this.ability = "";
-  this.abilityText = "";
+  this.ability = ability;
+  this.abilityText = text;
+
+  cardRepo.push(this);
 };
 Card.prototype.fillCardRepo = function () {
   cardRepo.push(this);
 };
-Game.prototype.startGame= function (input1, input2) { //inputs 1 and 2 are entered player names
+Game.prototype.startGame = function (input1, input2) { //inputs 1 and 2 are entered player names
   var player1 = new Player(input1);
   var player2 = new Player(input2);
-  var newBoard = new Board();
-};
-buildDeck = function (cardRepo) {
-  var Deck = cardRepo.slice();
-  return Deck;
+  this.players.push(player1);
+  this.players.push(player2);
+  this.board = new Board();
+
+  var impCard = new Card("Imp",  function() {forceDraw(newGame, newBoard)}, "When you play this minion, your opponent draws a card.");
+
+  this.board.buildDeck(cardRepo);
+  this.board.shuffleCards(this.board.p1Deck);
+  this.board.shuffleCards(this.board.p2Deck);
 };
 
-shuffleCards = function (playersDeck) {
-  var currentIndex = playersDeck.length;
+Board.prototype.buildDeck = function (cardRepo) {
+  var iterations = 30 / cardRepo.length;
+
+  cardRepo.forEach(function(card) {
+    console.log(this);
+    for (var i = 0; i < iterations; i++) {
+      this.p1Deck.push(card);
+      this.p2Deck.push(card);
+    }
+  }.bind(this));
+
+};
+
+Board.prototype.shuffleCards = function (deck) {
+  var currentIndex = deck.length;
   var temporaryValue;
   var randomIndex;
   while (0 !== currentIndex) {
     randomIndex = Math.floor(Math.random() * currentIndex);
     currentIndex -= 1;
-    temporaryValue = playersDeck[currentIndex];
-    playersDeck[currentIndex] = playersDeck[randomIndex];
-    playersDeck[randomIndex] = temporaryValue;
+    temporaryValue = deck[currentIndex];
+    deck[currentIndex] = deck[randomIndex];
+    deck[randomIndex] = temporaryValue;
   };
-  return playersDeck;
+  return deck;
 };
-Board.prototype.drawCards = function () {
+
+Board.prototype.drawCards = function (gameObj) {
+   if (gameObj.activePlayer === 1) {
+     var drawnCard = this.p1Deck.pop();
+     this.p1Hand.push(drawnCard);
+   }
+   else if (gameObj.activePlayer === 2) {
+     var drawnCard = this.p2Deck.pop();
+     this.p2Hand.push(drawnCard);
+   } else {
+     alert("drawCards ERROR!");
+   }
+}; //does this need a .bind?
+
+Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
+  if (gameObj.activePlayer === 1) {
+    var playedCard = this.p1Hand.splice(handIndex, 1);
+    this.p1Field[laneIndex] = playedCard;
+  } else if (gameObj.activePlayer === 2) {
+    var playedCard = this.p2Hand.splice(handIndex, 1);
+    this.p2Field[laneIndex] = playedCard;
+  } else {
+    alert("playCard ERROR!");
+  }
 };
-Board.prototype.playCard = function () {
+
+Board.prototype.forceDraw = function (gameObj) {//maybe not a prototype?
+  if (gameObj.activePlayer === 2) {
+    var drawnCard = gameObj.board.p1Deck.pop();
+    boardObj.p1Hand.push(drawnCard);
+  }
+  else if (gameObj.board.activePlayer === 1) {
+    var drawnCard = gameObj.board.p2Deck.pop();
+    boardObj.p2Hand.push(drawnCard);
+  } else {
+    alert("forceDraw ERROR!");
+  }
 };
-Board.prototype.millCards = function () {
-};
-Board.prototype.monsterFight= function (boardObj, index1, index2) { //indices 1 and 2 are array locations from the player fields
+
+Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1 and 2 are array locations from the player fields
   var array1 = boardObj.p1Field;
   var array2 = boardObj.p2Field;
-  var attacker = boardObj.p1Field[index1];
-  var defender = boardObj.p2Field[index2];
+  var attacker = boardObj.p1Field[index];
+  var defender = boardObj.p2Field[index];
+  attacker.health = attacker.health - defender.damage;
+  defender.health = defender.health - attacker.damage;
   if (attacker.health <= 0) {
-    var p1Dead = array1.splice(index1, 1);
-    boardObj.p1Graveyard.shift(p1Dead);
-  };
+    var p1Dead = array1[index];
+    array1[index] = undefined;
+    boardObj.p1Graveyard.push(p1Dead);
+  }
   if (defender.health <= 0) {
-    var p2Dead = array2.splice(index2, 1);
-    boardObj.p2p2Graveyard.shift(p2Dead);
-  };
+    var p2Dead = array2[index];
+    array2[index] = undefined;
+    boardObj.p2Graveyard.push(p2Dead);
+  }
 };
+
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
 //begin user interface
 $(document).ready(function(){
   $("img").click(function(){
     $(this).toggleClass('inactive');
-    var attkDamage = $(this).attr('damage');
-    var attkHealth = $(this).attr('health');
-    var attkName = $(this).attr('monsterName');
-    var newMonster = new Card(attkDamage, attkHealth, attkName);
-    newMonster.fillCardRepo();
   });
   $("#new-game").click(function() {
-    //remove this below part when we have real cards
-    for (var i=0 ; i<=30 ; i++) {
-      var someNumber = i;
-      var somecard = new Card(1, 1, someNumber);
-      somecard.fillCardRepo();
-    }
-    var p1Deck = buildDeck(cardRepo);
-    var p2Deck = buildDeck(cardRepo);
-    console.log(p1Deck);
-    console.log("below is a shuffled deck");
-    console.log(shuffleCards(cardRepo));
+      var newGame = new Game();
+      newGame.startGame();
+    console.log(newGame.board);
+
   });
 });
