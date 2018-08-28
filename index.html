@@ -9,81 +9,81 @@
   <script src="js/jquery-3.3.1.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
   <script src="js/scripts.js"></script>
-  <link href="https://fonts.googleapis.com/css?family=Amatic+SC" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Cinzel|Tangerine" rel="stylesheet">
 </head>
 
 <body>
   <div class="grid-container">
     <div id="player-1-info">
       <div id="player-1-name">
-        <p>player 1 name</p>
+        <h5>player 1 Name :</h5>
       </div>
       <div id="player-1-hp">
-        <p>Player 1 HP</p>
-        <button type="button" id="button" class="waves-effect waves-light btn amber darken-1">End Turn</button>
+        <h5>Player 1 HP :</h5>
+      </div>
+      <div id="end-turn">
+        <button type="button" class="waves-effect waves-light btn amber darken-1">End Turn</button>
       </div>
     </div>
     <div id="player-1-hand">
       <button type="button" id="new-game" class="waves-effect waves-light btn">NEW GAME</button>
-      <p>player 1 hand</p>
+      <h4>player 1 hand</h4>
     </div>
     <div id="player-2-info">
       <div id="player-2-name">
-        <p>player 2 name</p>
+        <h5>player 2 name :</h5>
       </div>
       <div id="player-2-hp">
-        <p>Player 2 HP</p>
-        <button type="button" id="button" class="waves-effect waves-light btn amber darken-1">End Turn</button>
+        <h5>Player 2 HP :</h5>
+        <div id="end-turn">
+          <button type="button" class="waves-effect waves-light btn amber darken-1">End Turn</button>
+        </div>
       </div>
     </div>
     <div id="player-2-hand">
-      <p>player 2 hand</p>
+      <h4>player 2 hand</h4>
     </div>
     <div class="play-area">
-      <div id="area-overlap player-1-deck">
-        <p>player 1 Deck</p>
+      <div id="area-overlap player-1-deck" class="board-decks">
         <img src="img/cardback-dark.jpg" class="card-back"></img>
       </div>
-      <div id="player-1-graveyard">
-        <p>player 1 graveyard</p>
+      <div id="player-1-graveyard" class="board-decks">
         <img src="img/cardback-dark.jpg" class="card-back"></img>
       </div>
-      <div id="player-2-deck">
-        <p>player 2 deck</p>
+      <div id="player-2-deck" class="board-decks">
         <img src="img/cardback-dark.jpg" class="card-back"></img>
       </div>
-      <div id="player-2-graveyard">
-        <p>player 2 graveyard</p>
+      <div id="player-2-graveyard" class="board-decks">
         <img src="img/cardback-dark.jpg" class="card-back"></img>
       </div>
-      <div id="p1c0">
+      <div id="p1c0" class="board-cards">
         <img src="img/card-frame_180w.png"></img>
       </div>
-      <div id="p1c1">
+      <div id="p1c1" class="board-cards">
         <img src="img/card-frame_180w.png"></img>
       </div>
-      <div id="p1c2">
+      <div id="p1c2" class="board-cards">
         <img src="img/card-frame_180w.png"></img>
       </div>
-      <div id="p1c3">
+      <div id="p1c3" class="board-cards">
         <img src="img/card-frame_180w.png"></img>
       </div>
-      <div id="p1c4">
+      <div id="p1c4" class="board-cards">
         <img src="img/card-frame_180w.png"></img>
       </div>
-      <div id="p2c0">
+      <div id="p2c0" class="board-cards">
         <img src="img/card-frame_180w.png"></img>
       </div>
-      <div id="p2c1">
+      <div id="p2c1" class="board-cards">
         <img src="img/card-frame_180w.png"></img>
       </div>
-      <div id="p2c2">
+      <div id="p2c2" class="board-cards">
         <img src="img/card-frame_180w.png"></img>
       </div>
-      <div id="p2c3">
+      <div id="p2c3" class="board-cards">
         <img src="img/card-frame_180w.png"></img>
       </div>
-      <div id="p2c4">
+      <div id="p2c4" class="board-cards">
         <img src="img/card-frame_180w.png"></img>
       </div>
     </div>
