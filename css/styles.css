@@ -50,17 +50,18 @@ html, body {
 
 #player-2-hand {
   grid-area: player-2-deck;
-  background-color: #FD9F09;
+  background-image: url("../img/handbg2.png")
 }
 
 #player-1-hand {
   grid-area: player-1-deck;
-  background-color: #FD9F09;
+  background-image: url("../img/handbg.png")
 }
 
 #play-area {
   grid-area: play-area;
-  background-color: #FF6800;
+  background-image: url("../img/board-bg.png");
+  background-position: center center;
 }
 
 #player-1-deck {
@@ -72,14 +73,14 @@ html, body {
 }
 
 #player-1-board {
-  background-color: #FF6800;
+
   padding-left: 3%;
   height: 100%;
   min-height: 100%;
 }
 
 #player-2-board {
-  background-color: #FF6800;
+
   padding-left: 3%;
 }
 
@@ -126,7 +127,7 @@ html, body {
 .player-card {
   margin: 0;
   width: 180px;
-  height: 280px;
+  height: 264px;
   position: relative;
   display: inline-block;
   overflow: hidden;
