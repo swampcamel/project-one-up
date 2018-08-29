@@ -64,11 +64,13 @@ Game.prototype.startGame = function (input1, input2) {
   this.players.push(player2);
   this.board = new Board();
 
+  var bleedAbility = function() {
+
+  };
   var sharedAbility = function() {
     forceDraw(newGame, newBoard)
   }
   var tauntAbility;
-  var bleedAbility;
   var monster3 = new Card(1, 1, 'Shub-Neggurath', sharedAbility, "When you play this minion, your opponent draws a card.", 'Tentacley Speaking, your baby sucks');
   var monster2 = new Card(1, 1, 'Kassogtha', sharedAbility, "When you play this minion, your opponent draws a card.", 'When eating Humans, start with the eyelids so they have to watch');
   var monster1 = new Card(1, 1, 'Sheograth', sharedAbility, "When you play this minion, your opponent draws a card.", 'Korn was my side project');
@@ -81,9 +83,6 @@ Game.prototype.startGame = function (input1, input2) {
   var monster10 = new Card(3,4, 'Attraxia', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "Roar?");
   var monster9 = new Card(3,4, 'Unnamable-Spawn', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For the Angel of Death spread his wings on the blast,And breathed in the face of the foe as he passed;And the eyes of the sleepers waxed deadly and chill And their hearts but once heaved, and for ever grew still!");
   var monster13 = new Card(3,4, 'Epthelius', bleedAbility, "Taunting allows monster to block an additonal creature", "And in thy Silence was his Sentence, And in his Soul a vain repentance, ");
-
-
-
   //var impCard = new Card("Imp",  function() {forceDraw(newGame, newBoard)}, "When you play this minion, your opponent draws a card.");
 
   this.board.buildDeck(cardRepo);
@@ -120,17 +119,31 @@ Board.prototype.shuffleCards = function (deck) {
 };
 
 Game.prototype.drawCards = function () {
+  loseCondition();
    if (this.activePlayer === 1) {
-     var drawnCard = this.board.p1Deck.pop();
-     this.board.p1Hand.push(drawnCard);
-   }
-   else if (this.activePlayer === 2) {
-     var drawnCard = this.board.p2Deck.pop();
-     this.board.p2Hand.push(drawnCard);
-   } else {
-     alert("drawCards ERROR!");
-   }
-}; //does this need a .bind?
+     if (this.p1hand.length < 8) {
+       var drawnCard = this.board.p1Deck.pop();
+       this.p1Hand.push(drawnCard);
+     }
+     else {
+       var drawnCard = this.board.p1Deck.pop();
+       this.p1graveyard.push(drawnCard);
+     }
+     }
+     if (this.activePlayer === 2) {
+       if (this.p2hand.length < 8) {
+         var drawnCard = this.board.p2Deck.pop();
+         this.p2Hand.push(drawnCard);
+       }
+       else {
+         var drawnCard = this.board.p2Deck.pop();
+         this.p2graveyard.push(drawnCard);
+       }
+     }
+     else {
+       alert("forceDraw ERROR!");
+     }
+   };
 
 Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
   if (gameObj.activePlayer === 1) {
@@ -145,14 +158,28 @@ Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
 };
 
 Board.prototype.forceDraw = function (gameObj) {//maybe not a prototype?
-  if (gameObj.activePlayer === 2) {
-    var drawnCard = gameObj.board.p1Deck.pop();
-    boardObj.p1Hand.push(drawnCard);
+  loseCondition();
+  if (this.activePlayer === 2) {
+    if (this.p1hand.length < 8) {
+      var drawnCard = gameObj.board.p1Deck.pop();
+      boardObj.p1Hand.push(drawnCard);
+    }
+    else {
+      var drawnCard = gameObj.board.p1Deck.pop();
+      boardObj.p1graveyard.push(drawnCard);
+    }
   }
-  else if (gameObj.board.activePlayer === 1) {
-    var drawnCard = gameObj.board.p2Deck.pop();
-    boardObj.p2Hand.push(drawnCard);
-  } else {
+  if (this.activePlayer === 1) {
+    if (this.p1hand.length < 8) {
+      var drawnCard = this.board.p2Deck.pop();
+      this.p2Hand.push(drawnCard);
+    }
+    else {
+      var drawnCard = gameObj.board.p2Deck.pop();
+      this.p2graveyard.push(drawnCard);
+    }
+  }
+  else {
     alert("forceDraw ERROR!");
   }
 };
@@ -205,8 +232,8 @@ $(document).ready(function(){
       newGame.startGame();
       var index1 = 0;
       var index2 = 0;
-      $('.p2Field').each(function () {
-        this.addClass('unclickable');
+      $('.p2field').each(function () {
+        $(this).addClass('unclickable');
       });
       $('#player-2-hand').addClass('unclickable');
       $("#player-2-info .end-turn").addClass('hidden');
@@ -281,6 +308,7 @@ $(document).on('click', '.hand-cards', function() {
 });
 
 $(document).on('click', '.board-lanes', function() {
+// active hand circumstance
   if ($(".hand-cards").hasClass("active-card")) {
     $(".active-card").appendTo(this);
     var handIndexofCard = $(".active-card").attr("id");
@@ -290,7 +318,8 @@ $(document).on('click', '.board-lanes', function() {
     handIndexofCard = handIndexofCard.split("");
     handIndexofCard = handIndexofCard[2];
     console.log(handIndexofCard);
-    $(".active-card").removeClass("active-card");
+    $(".active-card").addClass("field-cards");
+    $(".active-card").removeClass("active-card hand-cards");
 
     if (newGame.activePlayer == 1) {
       var activeCard = newGame.board.p1Hand.splice(handIndexofCard, 1);
@@ -319,8 +348,22 @@ $(document).on('click', '.board-lanes', function() {
     } else {
       console.log("else");
     }
-      console.log(newGame.board);
-  } else {
-      console.log("else");
+
+    console.log(newGame.board);
+// field circumstances
+  } else if ($(this).hasClass("active-field")) {
+    $(this).removeClass("active-field");
+
+  } else if ($(this).find("div").hasClass("field-cards")) {
+    $(this).addClass("active-field");
+    if (newGame.activePlayer == 1) {
+      $(".p2field").each(function() {
+        $(".p2field").removeClass("unclickable");
+    });
+  } else if (newGame.activePlayer == 2) {
+      $(".p1field").each(function() {
+        $(".12field").removeClass("unclickable");
+      });
+    }
   }
 });
