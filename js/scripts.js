@@ -9,10 +9,11 @@ function Game() {
   this.turnCount = 1; //just putting this in for future use
   this.board;
 };
+
 Player.prototype.damage = function(attackingCard) {
-    this.hp -= attackingCard.damage;
-    console.log(this.hp);
-    loseCondition();
+  this.hp -= attackingCard.damage;
+  loseCondition();
+  return this.hp;
 }
 
 function loseCondition() {
@@ -158,7 +159,7 @@ Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
 
 Board.prototype.forceDraw = function (gameObj) {//maybe not a prototype?
   loseCondition();
-  if (gameObj.activePlayer === 2) {
+  if (this.activePlayer === 2) {
     if (this.p1hand.length < 8) {
       var drawnCard = gameObj.board.p1Deck.pop();
       boardObj.p1Hand.push(drawnCard);
@@ -168,14 +169,14 @@ Board.prototype.forceDraw = function (gameObj) {//maybe not a prototype?
       boardObj.p1graveyard.push(drawnCard);
     }
   }
-  if (gameObj.activePlayer === 1) {
+  if (this.activePlayer === 1) {
     if (this.p1hand.length < 8) {
-      var drawnCard = gameObj.board.p2Deck.pop();
-      boardObj.p2Hand.push(drawnCard);
+      var drawnCard = this.board.p2Deck.pop();
+      this.p2Hand.push(drawnCard);
     }
     else {
       var drawnCard = gameObj.board.p2Deck.pop();
-      boardObj.p2graveyard.push(drawnCard);
+      this.p2graveyard.push(drawnCard);
     }
   }
   else {
@@ -235,6 +236,7 @@ $(document).ready(function(){
         this.addClass('unclickable');
       });
       $('#player-2-hand').addClass('unclickable');
+      $("#player-2-info .end-turn").addClass('hidden');
       newGame.board.p1Hand.forEach(function(card) {
         $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
         index1++;
@@ -245,8 +247,46 @@ $(document).ready(function(){
       });
       $('#new-game').hide();
   });
+
   $(".end-turn").click(function(){
     endTurn(newGame);
+    if (newGame.activePlayer === 1) {
+      $('.p2Field').each(function () {
+        this.addClass('unclickable');
+      });
+      $('#player-2-hand').addClass('unclickable');
+      $("#player-2-info .end-turn").addClass('hidden');
+      $('.p1Field').each(function () {
+        this.removeClass('unclickable');
+      });
+      $('#player-1-hand').removeClass('unclickable');
+      $("#player-1-info .end-turn").removeClass('hidden');
+      var index1 = 0;
+      $('#player-1-hand').empty();
+      newGame.board.p1Hand.forEach(function(card) {
+        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+        index1++;
+      });
+    } else if (newGame.activePlayer === 2) {
+      $('.p1Field').each(function () {
+        this.addClass('unclickable');
+      });
+      $('#player-1-hand').addClass('unclickable');
+      $("#player-1-info .end-turn").addClass('hidden');
+      $('.p2Field').each(function () {
+        this.removeClass('unclickable');
+      });
+      $('#player-2-hand').removeClass('unclickable');
+      $("#player-2-info .end-turn").removeClass('hidden');
+      var index2 = 0;
+      $('#player-2-hand').empty();
+      newGame.board.p2Hand.forEach(function(card) {
+        $('#player-2-hand').append('<div id=\"p2' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+        index2++;
+      });
+    } else {
+      alert("end turn interface error");
+    }
   });
 });
 
@@ -272,7 +312,9 @@ $(document).on('click', '.board-lanes', function() {
     handIndexofCard = handIndexofCard.split("");
     handIndexofCard = handIndexofCard[2];
     console.log(handIndexofCard);
-    $(".active-card").removeClass("active-card");
+    $(".active-card").addClass("field-cards");
+    $(".active-card").removeClass("active-card hand-cards");
+
     if (newGame.activePlayer == 1) {
       var activeCard = newGame.board.p1Hand.splice(handIndexofCard, 1);
       var activeCard = activeCard[0];
@@ -290,8 +332,8 @@ $(document).on('click', '.board-lanes', function() {
       var index2 = 0;
       $('#player-2-hand').empty();
       newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p1' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
+        $('#player-2-hand').append('<div id=\"p2' + index2 +'\"  class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>'); //previously "p1' + index
+        index2++; //previously index1
       });
       newGame.board.p2Field[boardIndex] = activeCard;
 
@@ -299,7 +341,9 @@ $(document).on('click', '.board-lanes', function() {
       console.log("else");
     }
       console.log(newGame.board);
-  } else {
-      console.log("else");
+    } else if ($(this).hasClass("active-field")) {
+      $(this).removeClass("active-field");
+    } else if ($(this).find("div").hasClass("field-cards")) {
+      $(this).addClass("active-field")
   }
 });
