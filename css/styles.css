@@ -249,7 +249,5 @@ html, body {
 .unclickable {
   pointer-events: none;
 }
-
-.field-cards {
-
-}
+ .field-cards {
+ }
