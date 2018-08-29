@@ -174,10 +174,10 @@ $(document).ready(function(){
       newGame.startGame();
       console.log(newGame.board);
       newGame.board.p1Hand.forEach(function(card) {
-        $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180w.png\"></div>');
+        $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
       });
       newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180w.png\"></div>');
+        $('#player-2-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt\"></div>');
       });
       $('#new-game').hide();
   });
@@ -194,7 +194,7 @@ $(document).on('click', '.hand-cards', function() {
   }
 });
 
-$(document).on('click', '.board-cards', function() {
+$(document).on('click', '.board-lanes', function() {
   if ($(".hand-cards").hasClass("active-card")) {
     $(".active-card").appendTo(this);
     $(".active-card").removeClass("active-card");
