@@ -127,7 +127,7 @@ Game.prototype.drawCards = function () {
      }
      else {
        var drawnCard = this.board.p1Deck.pop();
-       this.board.p1graveyard.push(drawnCard);
+       this.board.p1Graveyard.push(drawnCard);
      }
      }
      if (this.activePlayer === 2) {
@@ -137,7 +137,7 @@ Game.prototype.drawCards = function () {
        }
        else {
          var drawnCard = this.board.p2Deck.pop();
-         this.board.p2graveyard.push(drawnCard);
+         this.board.p2Graveyard.push(drawnCard);
        }
      }
      else {
@@ -160,13 +160,13 @@ Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
 Board.prototype.forceDraw = function (gameObj) {//maybe not a prototype?
   loseCondition();
   if (this.activePlayer === 2) {
-    if (this.p1hand.length < 8) {
+    if (this.p1Hand.length < 8) {
       var drawnCard = gameObj.board.p1Deck.pop();
       boardObj.p1Hand.push(drawnCard);
     }
     else {
       var drawnCard = gameObj.board.p1Deck.pop();
-      boardObj.p1graveyard.push(drawnCard);
+      boardObj.p1Graveyard.push(drawnCard);
     }
   }
   if (this.activePlayer === 1) {
@@ -176,7 +176,7 @@ Board.prototype.forceDraw = function (gameObj) {//maybe not a prototype?
     }
     else {
       var drawnCard = gameObj.board.p2Deck.pop();
-      this.p2graveyard.push(drawnCard);
+      this.p2Graveyard.push(drawnCard);
     }
   }
   else {
@@ -309,6 +309,42 @@ $(document).on('click', '.hand-cards', function() {
 });
 
 $(document).on('click', '.board-lanes', function() {
+  if ((newGame.activePlayer == 1)
+   && ($(this).hasClass("p2field"))
+    && ($(this).find("div").hasClass("field-cards"))
+     && ($(".field-cards").hasClass("active-field"))) {
+       var boardIndex = $(this).attr("id");
+       boardIndex = boardIndex.split("");
+       boardIndex = boardIndex[2];
+       var card1 = newGame.board.p1Field[boardIndex]
+       var card2 = newGame.board.p2Field[boardIndex]
+       console.log(card1);
+       newGame.board.p1Graveyard.push(card1);
+       newGame.board.p2Graveyard.push(card2);
+       newGame.board.p1Field[boardIndex] = undefined;
+       newGame.board.p2Field[boardIndex] = undefined;
+      $(this).empty();
+      $(".active-field").remove();
+      $(".active-field").removeClass("active-field");
+       console.log("SUCCESS");
+  } else if ((newGame.activePlayer == 2)
+     && ($(this).hasClass("p1field"))
+      && ($(this).find("div").hasClass("field-cards"))
+       && ($(".p2field").hasClass("active-field"))) {
+         var boardIndex = $(this).attr("id");
+         boardIndex = boardIndex.split("");
+         boardIndex = boardIndex[2];
+         var card1 = newGame.board.p1Field[boardIndex]
+         var card2 = newGame.board.p2Field[boardIndex]
+         newGame.board.p1Graveyard.push(card1);
+         newGame.board.p2Graveyard.push(card2);
+         newGame.board.p1Field[boardIndex] = undefined;
+         newGame.board.p2Field[boardIndex] = undefined;
+         $(this).empty();
+         $(".active-field").find(".field-cards").remove();
+         $(".active-field").removeClass("active-field");
+         console.log("SUCCESS");
+  }
 // active hand circumstance
   if ($(".hand-cards").hasClass("active-card")) {
     $(".active-card").appendTo(this);
@@ -375,11 +411,13 @@ $(document).on('click', '.board-lanes', function() {
       $(".p2field").each(function() {
         $(".p2field").removeClass("unclickable");
       });
-  } else if (newGame.activePlayer == 2) {
-      $(this).addClass("active-field");
-      $(".p1field").each(function() {
-        $(".p1field").removeClass("unclickable");
-      });
-    }
-  }
+    } else if (newGame.activePlayer == 2) {
+        $(this).addClass("active-field");
+        $(".p1field").each(function() {
+          $(".p1field").removeClass("unclickable");
+        });
+      }
+
+  // If you click on an enemy board spot that has a minion in it while you have an active minion highlighted
+}
 });
