@@ -144,14 +144,28 @@ Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
 };
 
 Board.prototype.forceDraw = function (gameObj) {//maybe not a prototype?
+  loseCondition();
   if (gameObj.activePlayer === 2) {
-    var drawnCard = gameObj.board.p1Deck.pop();
-    boardObj.p1Hand.push(drawnCard);
+    if (this.p1hand.length < 8) {
+      var drawnCard = gameObj.board.p1Deck.pop();
+      boardObj.p1Hand.push(drawnCard);
+    }
+    else {
+      var drawnCard = gameObj.board.p1Deck.pop();
+      boardObj.p1graveyard.push(drawnCard);
+    }
   }
-  else if (gameObj.board.activePlayer === 1) {
-    var drawnCard = gameObj.board.p2Deck.pop();
-    boardObj.p2Hand.push(drawnCard);
-  } else {
+  if (gameObj.activePlayer === 1) {
+    if (this.p1hand.length < 8) {
+      var drawnCard = gameObj.board.p2Deck.pop();
+      boardObj.p2Hand.push(drawnCard);
+    }
+    else {
+      var drawnCard = gameObj.board.p2Deck.pop();
+      boardObj.p2graveyard.push(drawnCard);
+    }
+  }
+  else {
     alert("forceDraw ERROR!");
   }
 };
