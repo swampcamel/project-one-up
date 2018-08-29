@@ -24,12 +24,18 @@ function Player(input) {
   this.name = input;
   this.hp = 10;
 };
+Player.prototype.Damage = function(attackingCard) {
+    this.hp -= attackingCard.damage;
+    console.log(this.hp);
+    console.log(loseCondition());
+}
 
 function loseCondition() {
   for (i = 0; i < 2; i++)
   if (newGame.players[i].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
     alert(newGame.players[i].name + " is dead");
   }
+  return false;
 }
 
 function Card(damage, health, name, ability, text, flavor){
