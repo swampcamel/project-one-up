@@ -1,6 +1,5 @@
 //backend (game) logic
 var cardRepo = [];
-var newGame;
 
 function Game() {
   this.players = []; //array of player objects
@@ -26,6 +25,15 @@ function Player(input) {
   this.hp = 10;
 };
 
+function loseCondition() {
+  if (newGame.players[0].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
+    alert(newGame.players[0].name + " is dead");
+    }
+  else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
+      alert(newGame.players[1].name + " is dead");
+  }
+}
+
 function Card(damage, health, name, ability, text, flavor){
 
   this.damage = damage;
@@ -46,6 +54,7 @@ Game.prototype.startGame = function (input1, input2) {
   cardRepo = [];  //inputs 1 and 2 are entered player names
   var player1 = new Player(input1);
   var player2 = new Player(input2);
+  this.players=[];
   this.players.push(player1);
   this.players.push(player2);
   this.board = new Board();
@@ -171,8 +180,11 @@ $(document).ready(function(){
   });
 
   $("#new-game").click(function() {
-      newGame = new Game();
-      newGame.startGame();
+      var newGame = new Game();
+      newGame.startGame('jesus','mary');
+      console.log(newGame.board);
+      newGame.players[0].hp=0;
+      loseCondition();
       newGame.board.p1Hand.forEach(function(card) {
         $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
       });
@@ -198,8 +210,7 @@ $(document).on('click', '.board-lanes', function() {
   if ($(".hand-cards").hasClass("active-card")) {
     $(".active-card").appendTo(this);
     $(".active-card").removeClass("active-card");
-
-    console.log(newGame.board);
+    console.log(this);
   } else {
     console.log("else");
   }
