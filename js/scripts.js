@@ -177,7 +177,7 @@ $(document).ready(function(){
         $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
       });
       newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt\"></div>');
+        $('#player-2-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
       });
       $('#new-game').hide();
   });
