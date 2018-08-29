@@ -257,3 +257,7 @@ html, body {
 .field-cards {
   border: 2px solid yellow;
  }
+
+ .hidden {
+   display: none;
+ }
