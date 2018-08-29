@@ -119,17 +119,31 @@ Board.prototype.shuffleCards = function (deck) {
 };
 
 Game.prototype.drawCards = function () {
+  loseCondition();
    if (this.activePlayer === 1) {
-     var drawnCard = this.board.p1Deck.pop();
-     this.board.p1Hand.push(drawnCard);
-   }
-   else if (this.activePlayer === 2) {
-     var drawnCard = this.board.p2Deck.pop();
-     this.board.p2Hand.push(drawnCard);
-   } else {
-     alert("drawCards ERROR!");
-   }
-}; //does this need a .bind?
+     if (this.p1hand.length < 8) {
+       var drawnCard = gameObj.board.p1Deck.pop();
+       boardObj.p1Hand.push(drawnCard);
+     }
+     else {
+       var drawnCard = gameObj.board.p1Deck.pop();
+       boardObj.p1graveyard.push(drawnCard);
+     }
+     }
+     if (gameObj.activePlayer === 2) {
+       if (this.p2hand.length < 8) {
+         var drawnCard = gameObj.board.p2Deck.pop();
+         boardObj.p2Hand.push(drawnCard);
+       }
+       else {
+         var drawnCard = gameObj.board.p2Deck.pop();
+         boardObj.p2graveyard.push(drawnCard);
+       }
+     }
+     else {
+       alert("forceDraw ERROR!");
+     }
+   };
 
 Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
   if (gameObj.activePlayer === 1) {
