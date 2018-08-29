@@ -102,14 +102,35 @@ html, body {
 }
 
 .board-lanes {
-  margin-top: 25%;
-  border: solid 1px green;
+  /* margin-top: 25%; */
+  /* border: solid 1px green; */
+
 }
 
 .board-lanes img {
   max-width:100%;
   max-height:100%;
   object-fit: contain;
+}
+
+.p1field {
+  background-image: url("../img/lane-bg.png");
+  background-position: bottom center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
+}
+
+.p2field {
+  background-image: url("../img/lane-bg-flipped.png");
+  background-position: top center;
+  background-repeat: no-repeat;
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 #p1c0 {
