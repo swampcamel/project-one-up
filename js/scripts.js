@@ -6,7 +6,7 @@ function Game() {
   this.players = []; //array of player objects
   this.activePlayer = 1;
   this.winner = "";
-  this.turnCount = 0; //just putting this in for future use
+  this.turnCount = 1; //just putting this in for future use
   this.board;
 };
 
@@ -105,14 +105,14 @@ Board.prototype.shuffleCards = function (deck) {
   return deck;
 };
 
-Board.prototype.drawCards = function (gameObj) {
-   if (gameObj.activePlayer === 1) {
-     var drawnCard = this.p1Deck.pop();
-     this.p1Hand.push(drawnCard);
+Game.prototype.drawCards = function () {
+   if (this.activePlayer === 1) {
+     var drawnCard = this.board.p1Deck.pop();
+     this.board.p1Hand.push(drawnCard);
    }
-   else if (gameObj.activePlayer === 2) {
-     var drawnCard = this.p2Deck.pop();
-     this.p2Hand.push(drawnCard);
+   else if (this.activePlayer === 2) {
+     var drawnCard = this.board.p2Deck.pop();
+     this.board.p2Hand.push(drawnCard);
    } else {
      alert("drawCards ERROR!");
    }
@@ -162,11 +162,27 @@ Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1
   }
 };
 
-function endTurn() {
-  
-};
+
+function endTurn(gameObj) {
+  // switch clickability
+  if (gameObj.activePlayer === 1) {
+    gameObj.activePlayer = 2;
+  } else if (gameObj.activePlayer === 2) {
+    gameObj.activePlayer = 1;
+  } else {
+    alert("endTurn player switch ERROR!");
+  }
+  // begin new active player turn
+  // active player draws card
+  gameObj.drawCards();
+  // console.log("active player = " + gameObj.activePlayer);
+  // console.log("p1 " + gameObj.board.p1Hand + " ps2 " + gameObj.board.p2Hand);
+  gameObj.turnCount += 1;
+  // console.log("turn " + gameObj.turnCount);
 
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
+
+
 //begin user interface
 $(document).ready(function(){
 
@@ -189,7 +205,11 @@ $(document).ready(function(){
       });
       $('#new-game').hide();
   });
+  $(".end-turn").click(function(){
+    endTurn(newGame);
+  });
 });
+
 
 $(document).on('click', '.hand-cards', function() {
   if ($(this).hasClass("active-card")) {
