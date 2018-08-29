@@ -326,11 +326,12 @@ $(document).on('click', '.board-lanes', function() {
       var activeCard = activeCard[0];
       var index1 = 0;
       $('#player-1-hand').empty();
+
       newGame.board.p1Hand.forEach(function(card) {
         $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
         index1++;
-      newGame.board.p1Field[boardIndex] = activeCard;
       });
+      newGame.board.p1Field[boardIndex] = activeCard;
 
     } else if (newGame.activePlayer == 2) {
       var activeCard = newGame.board.p2Hand.splice(handIndexofCard, 1);
@@ -341,6 +342,7 @@ $(document).on('click', '.board-lanes', function() {
         $('#player-2-hand').append('<div id=\"p2' + index2 +'\"  class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>'); //previously "p1' + index
         index2++; //previously index1
       });
+
       newGame.board.p2Field[boardIndex] = activeCard;
 
     } else {
