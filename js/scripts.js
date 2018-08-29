@@ -199,15 +199,15 @@ var monsterTracker = 2; //this is for proto display reasons and starting with 2 
 //begin user interface
 $(document).ready(function(){
 
-  $("img").click(function(){
-    $(this).toggleClass('inactive');
-  });
-
   $("#new-game").click(function() {
       newGame = new Game();
       newGame.startGame();
       var index1 = 0;
       var index2 = 0;
+      $('.p2Field').each(function () {
+        this.addClass('unclickable');
+      });
+      $('#player-2-hand').addClass('unclickable');
       newGame.board.p1Hand.forEach(function(card) {
         $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
         index1++;
