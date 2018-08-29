@@ -63,11 +63,13 @@ Game.prototype.startGame = function (input1, input2) {
   this.players.push(player2);
   this.board = new Board();
 
+  var bleedAbility = function() {
+
+  };
   var sharedAbility = function() {
     forceDraw(newGame, newBoard)
   }
   var tauntAbility;
-  var bleedAbility;
   var monster3 = new Card(1, 1, 'Shub-Neggurath', sharedAbility, "When you play this minion, your opponent draws a card.", 'Tentacley Speaking, your baby sucks');
   var monster2 = new Card(1, 1, 'Kassogtha', sharedAbility, "When you play this minion, your opponent draws a card.", 'When eating Humans, start with the eyelids so they have to watch');
   var monster1 = new Card(1, 1, 'Sheograth', sharedAbility, "When you play this minion, your opponent draws a card.", 'Korn was my side project');
@@ -80,9 +82,6 @@ Game.prototype.startGame = function (input1, input2) {
   var monster10 = new Card(3,4, 'Attraxia', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "Roar?");
   var monster9 = new Card(3,4, 'Unnamable-Spawn', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For the Angel of Death spread his wings on the blast,And breathed in the face of the foe as he passed;And the eyes of the sleepers waxed deadly and chill And their hearts but once heaved, and for ever grew still!");
   var monster13 = new Card(3,4, 'Epthelius', bleedAbility, "Taunting allows monster to block an additonal creature", "And in thy Silence was his Sentence, And in his Soul a vain repentance, ");
-
-
-
   //var impCard = new Card("Imp",  function() {forceDraw(newGame, newBoard)}, "When you play this minion, your opponent draws a card.");
 
   this.board.buildDeck(cardRepo);
@@ -122,22 +121,22 @@ Game.prototype.drawCards = function () {
   loseCondition();
    if (this.activePlayer === 1) {
      if (this.p1hand.length < 8) {
-       var drawnCard = gameObj.board.p1Deck.pop();
-       boardObj.p1Hand.push(drawnCard);
+       var drawnCard = this.board.p1Deck.pop();
+       this.p1Hand.push(drawnCard);
      }
      else {
-       var drawnCard = gameObj.board.p1Deck.pop();
-       boardObj.p1graveyard.push(drawnCard);
+       var drawnCard = this.board.p1Deck.pop();
+       this.p1graveyard.push(drawnCard);
      }
      }
-     if (gameObj.activePlayer === 2) {
+     if (this.activePlayer === 2) {
        if (this.p2hand.length < 8) {
-         var drawnCard = gameObj.board.p2Deck.pop();
-         boardObj.p2Hand.push(drawnCard);
+         var drawnCard = this.board.p2Deck.pop();
+         this.p2Hand.push(drawnCard);
        }
        else {
-         var drawnCard = gameObj.board.p2Deck.pop();
-         boardObj.p2graveyard.push(drawnCard);
+         var drawnCard = this.board.p2Deck.pop();
+         this.p2graveyard.push(drawnCard);
        }
      }
      else {
