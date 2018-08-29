@@ -6,7 +6,7 @@ function Game() {
   this.players = []; //array of player objects
   this.activePlayer = 1;
   this.winner = "";
-  this.roundCount = 0; //just putting this in for future use
+  this.turnCount = 0; //just putting this in for future use
   this.board;
 };
 
@@ -161,6 +161,8 @@ Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1
     boardObj.p2Graveyard.push(p2Dead);
   }
 };
+
+function endTurn()
 
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
 //begin user interface
