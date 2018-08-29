@@ -121,23 +121,23 @@ Board.prototype.shuffleCards = function (deck) {
 Game.prototype.drawCards = function () {
   loseCondition();
    if (this.activePlayer === 1) {
-     if (this.p1hand.length < 8) {
+     if (this.board.p1Hand.length < 8) {
        var drawnCard = this.board.p1Deck.pop();
-       this.p1Hand.push(drawnCard);
+       this.board.p1Hand.push(drawnCard);
      }
      else {
        var drawnCard = this.board.p1Deck.pop();
-       this.p1graveyard.push(drawnCard);
+       this.board.p1graveyard.push(drawnCard);
      }
      }
      if (this.activePlayer === 2) {
-       if (this.p2hand.length < 8) {
+       if (this.board.p2Hand.length < 8) {
          var drawnCard = this.board.p2Deck.pop();
-         this.p2Hand.push(drawnCard);
+         this.board.p2Hand.push(drawnCard);
        }
        else {
          var drawnCard = this.board.p2Deck.pop();
-         this.p2graveyard.push(drawnCard);
+         this.board.p2graveyard.push(drawnCard);
        }
      }
      else {
@@ -252,14 +252,14 @@ $(document).ready(function(){
   $(".end-turn").click(function(){
     endTurn(newGame);
     if (newGame.activePlayer === 1) {
-      $('.p2Field').each(function () {
-        this.addClass('unclickable');
+      $('.p2field').each(function () {
+        $(this).addClass('unclickable');
       });
       $('#player-2-hand').addClass('unclickable');
       $("#player-2-info .end-turn").addClass('hidden');
       $("#player-1-info").addClass("highlight");
-      $('.p1Field').each(function () {
-        this.removeClass('unclickable');
+      $('.p1field').each(function () {
+        $(this).removeClass('unclickable');
       });
       $('#player-1-hand').removeClass('unclickable');
       $("#player-1-info .end-turn").removeClass('hidden');
@@ -270,15 +270,16 @@ $(document).ready(function(){
         $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
         index1++;
       });
+
     } else if (newGame.activePlayer === 2) {
-      $('.p1Field').each(function () {
-        this.addClass('unclickable');
+      $('.p1field').each(function () {
+        $(this).addClass('unclickable');
       });
       $('#player-1-hand').addClass('unclickable');
       $("#player-1-info .end-turn").addClass('hidden');
       $("#player-2-info").addClass("highlight");
-      $('.p2Field').each(function () {
-        this.removeClass('unclickable');
+      $('.p2field').each(function () {
+        $(this).removeClass('unclickable');
       });
       $('#player-2-hand').removeClass('unclickable');
       $("#player-2-info .end-turn").removeClass('hidden');
@@ -351,18 +352,33 @@ $(document).on('click', '.board-lanes', function() {
 
     console.log(newGame.board);
 // field circumstances
+  // If you click on a field card that is already highlighted
   } else if ($(this).hasClass("active-field")) {
     $(this).removeClass("active-field");
 
-  } else if ($(this).find("div").hasClass("field-cards")) {
-    $(this).addClass("active-field");
     if (newGame.activePlayer == 1) {
       $(".p2field").each(function() {
-        $(".p2field").removeClass("unclickable");
-    });
+        $(".p2field").addClass("unclickable");
+      });
+
   } else if (newGame.activePlayer == 2) {
       $(".p1field").each(function() {
-        $(".12field").removeClass("unclickable");
+        $(".p1field").addClass("unclickable");
+      });
+    }
+  }
+  //If you click on a field card that is not highlighted
+  else if ($(this).find("div").hasClass("field-cards")) {
+    $(this).addClass("active-field");
+    if (newGame.activePlayer == 1) {
+      $(this).addClass("active-field");
+      $(".p2field").each(function() {
+        $(".p2field").removeClass("unclickable");
+      });
+  } else if (newGame.activePlayer == 2) {
+      $(this).addClass("active-field");
+      $(".p1field").each(function() {
+        $(".p1field").removeClass("unclickable");
       });
     }
   }
