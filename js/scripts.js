@@ -26,11 +26,9 @@ function Player(input) {
 };
 
 function loseCondition() {
-  if (newGame.players[0].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
-    alert(newGame.players[0].name + " is dead");
-    }
-  else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
-      alert(newGame.players[1].name + " is dead");
+  for (i = 0; i < 2; i++)
+  if (newGame.players[i].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
+    alert(newGame.players[i].name + " is dead");
   }
 }
 
@@ -181,7 +179,7 @@ $(document).ready(function(){
 
   $("#new-game").click(function() {
       var newGame = new Game();
-      newGame.startGame('jesus','mary');
+      newGame.startGame();
       console.log(newGame.board);
       newGame.board.p1Hand.forEach(function(card) {
         $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
