@@ -143,14 +143,15 @@ Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
   }
 };
 
-Board.prototype.forceDraw = function (gameObj) {//maybe not a prototype?
-  if (gameObj.activePlayer === 2) {
-    var drawnCard = gameObj.board.p1Deck.pop();
-    boardObj.p1Hand.push(drawnCard);
+Game.prototype.forceDraw = function () {//maybe not a prototype?
+  console.log(this.activePlayer);
+  if (this.activePlayer === 2) {
+    var drawnCard = this.board.p1Deck.pop();
+    this.board.p1Hand.push(drawnCard);
   }
-  else if (gameObj.board.activePlayer === 1) {
-    var drawnCard = gameObj.board.p2Deck.pop();
-    boardObj.p2Hand.push(drawnCard);
+  else if (this.board.activePlayer === 1) {
+    var drawnCard = this.board.p2Deck.pop();
+    this.board.p2Hand.push(drawnCard);
   } else {
     alert("forceDraw ERROR!");
   }
@@ -245,7 +246,9 @@ $(document).on('click', '.board-lanes', function() {
     handIndexofCard = handIndexofCard.split("");
     handIndexofCard = handIndexofCard[2];
     console.log(handIndexofCard);
-    $(".active-card").removeClass("active-card");
+    $(".active-card").addClass("field-cards");
+    $(".active-card").removeClass("active-card hand-cards");
+
     if (newGame.activePlayer == 1) {
       var activeCard = newGame.board.p1Hand.splice(handIndexofCard, 1);
       var activeCard = activeCard[0];
@@ -272,7 +275,9 @@ $(document).on('click', '.board-lanes', function() {
       console.log("else");
     }
       console.log(newGame.board);
-  } else {
-      console.log("else");
+    } else if ($(this).hasClass("active-field")) {
+      $(this).removeClass("active-field");
+    } else if ($(this).find("div").hasClass("field-cards")) {
+      $(this).addClass("active-field")
   }
 });
