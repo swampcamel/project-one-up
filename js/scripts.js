@@ -220,6 +220,13 @@ $(document).ready(function(){
   });
   $(".end-turn").click(function(){
     endTurn(newGame);
+    if (newGame.activePlayer === 1) {
+
+    } else if (newGame.activePlayer === 2) {
+
+    } else {
+      alert("end turn interface error");
+    }
   });
 });
 
