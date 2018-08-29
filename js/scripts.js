@@ -183,8 +183,6 @@ $(document).ready(function(){
       var newGame = new Game();
       newGame.startGame('jesus','mary');
       console.log(newGame.board);
-      newGame.players[0].hp=0;
-      loseCondition();
       newGame.board.p1Hand.forEach(function(card) {
         $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
       });
