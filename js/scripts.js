@@ -13,11 +13,11 @@ function Game() {
 function Board() {
   this.p1Deck = []; //each player has a generated and shuffled deck
   this.p1Hand = []; //hands are filled from respective decks
-  this.p1Field = []; //a field is the space where cards are played
+  this.p1Field = [undefined, undefined, undefined, undefined, undefined]; //a field is the space where cards are played
   this.p1Graveyard = []; //a graveyard is a player's discard pile
   this.p2Deck = [];
   this.p2Hand = [];
-  this.p2Field = [];
+  this.p2Field = [undefined, undefined, undefined, undefined, undefined];
   this.p2Graveyard = [];
 };
 
@@ -151,13 +151,13 @@ Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1
   attacker.health = attacker.health - defender.damage;
   defender.health = defender.health - attacker.damage;
   if (attacker.health <= 0) {
-    var p1Dead = array1[index];
-    array1[index] = undefined;
+    var p1Dead = Board.p1Field[index];
+    Board.p1Field[index] = undefined;
     boardObj.p1Graveyard.push(p1Dead);
   }
   if (defender.health <= 0) {
-    var p2Dead = array2[index];
-    array2[index] = undefined;
+    var p2Dead = Board.p2Field[index];
+    Board.p2Field[index] = undefined;
     boardObj.p2Graveyard.push(p2Dead);
   }
 };
@@ -179,7 +179,7 @@ function endTurn(gameObj) {
   // console.log("p1 " + gameObj.board.p1Hand + " ps2 " + gameObj.board.p2Hand);
   gameObj.turnCount += 1;
   // console.log("turn " + gameObj.turnCount);
-
+}
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
 
 
@@ -226,33 +226,39 @@ $(document).on('click', '.board-lanes', function() {
   if ($(".hand-cards").hasClass("active-card")) {
     $(".active-card").appendTo(this);
     var handIndexofCard = $(".active-card").attr("id");
+    var boardIndex = $(this).attr("id");
+    boardIndex = boardIndex.split("");
+    boardIndex = boardIndex[2];
     handIndexofCard = handIndexofCard.split("");
     handIndexofCard = handIndexofCard[2];
     console.log(handIndexofCard);
     $(".active-card").removeClass("active-card");
-
     if (newGame.activePlayer == 1) {
-      newGame.board.p1Hand.splice(handIndexofCard, 1);
+      var activeCard = newGame.board.p1Hand.splice(handIndexofCard, 1);
+      var activeCard = activeCard[0];
       var index1 = 0;
       $('#player-1-hand').empty();
       newGame.board.p1Hand.forEach(function(card) {
         $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
         index1++;
+      newGame.board.p1Field[boardIndex] = activeCard;
       });
 
     } else if (newGame.activePlayer == 2) {
-      newGame.board.p2Hand.splice(handIndexofCard, 1);
+      var activeCard = newGame.board.p2Hand.splice(handIndexofCard, 1);
+      var activeCard = activeCard[0];
       var index2 = 0;
       $('#player-2-hand').empty();
       newGame.board.p2Hand.forEach(function(card) {
         $('#player-2-hand').append('<div id=\"p1' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
         index1++;
-    });
+      });
+      newGame.board.p2Field[boardIndex] = activeCard;
 
     } else {
       console.log("else");
     }
-      console.log(newGame.board.p1Hand);
+      console.log(newGame.board);
   } else {
       console.log("else");
   }
