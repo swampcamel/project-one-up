@@ -251,3 +251,7 @@ html, body {
 }
  .field-cards {
  }
+
+ .hidden {
+   display: none;
+ }
