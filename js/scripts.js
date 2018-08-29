@@ -1,5 +1,6 @@
 //backend (game) logic
 var cardRepo = [];
+var newGame;
 
 function Game() {
   this.players = []; //array of player objects
@@ -170,9 +171,8 @@ $(document).ready(function(){
   });
 
   $("#new-game").click(function() {
-      var newGame = new Game();
+      newGame = new Game();
       newGame.startGame();
-      console.log(newGame.board);
       newGame.board.p1Hand.forEach(function(card) {
         $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
       });
@@ -198,7 +198,8 @@ $(document).on('click', '.board-lanes', function() {
   if ($(".hand-cards").hasClass("active-card")) {
     $(".active-card").appendTo(this);
     $(".active-card").removeClass("active-card");
-    console.log(this);
+
+    console.log(newGame.board);
   } else {
     console.log("else");
   }
