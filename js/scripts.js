@@ -1,6 +1,5 @@
 //backend (game) logic
 var cardRepo = [];
-var newGame;
 
 function Game() {
   this.players = []; //array of player objects
@@ -26,6 +25,15 @@ function Player(input) {
   this.hp = 10;
 };
 
+function loseCondition() {
+  if (newGame.players[0].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
+    alert(newGame.players[0].name + " is dead");
+    }
+  else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
+      alert(newGame.players[1].name + " is dead");
+  }
+}
+
 function Card(damage, health, name, ability, text, flavor){
 
   this.damage = damage;
@@ -46,6 +54,7 @@ Game.prototype.startGame = function (input1, input2) {
   cardRepo = [];  //inputs 1 and 2 are entered player names
   var player1 = new Player(input1);
   var player2 = new Player(input2);
+  this.players=[];
   this.players.push(player1);
   this.players.push(player2);
   this.board = new Board();
@@ -162,7 +171,6 @@ Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1
   }
 };
 
-
 function endTurn(gameObj) {
   // switch clickability
   if (gameObj.activePlayer === 1) {
@@ -191,17 +199,14 @@ $(document).ready(function(){
   });
 
   $("#new-game").click(function() {
-      newGame = new Game();
-      newGame.startGame();
-      var index1 = 0;
-      var index2 = 0;
+      var newGame = new Game();
+      newGame.startGame('jesus','mary');
+      console.log(newGame.board);
       newGame.board.p1Hand.forEach(function(card) {
-        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
+        $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
       });
       newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p1' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index2++;
+        $('#player-2-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
       });
       $('#new-game').hide();
   });
@@ -225,35 +230,9 @@ $(document).on('click', '.hand-cards', function() {
 $(document).on('click', '.board-lanes', function() {
   if ($(".hand-cards").hasClass("active-card")) {
     $(".active-card").appendTo(this);
-    var handIndexofCard = $(".active-card").attr("id");
-    handIndexofCard = handIndexofCard.split("");
-    handIndexofCard = handIndexofCard[2];
-    console.log(handIndexofCard);
     $(".active-card").removeClass("active-card");
-
-    if (newGame.activePlayer == 1) {
-      newGame.board.p1Hand.splice(handIndexofCard, 1);
-      var index1 = 0;
-      $('#player-1-hand').empty();
-      newGame.board.p1Hand.forEach(function(card) {
-        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
-      });
-
-    } else if (newGame.activePlayer == 2) {
-      newGame.board.p2Hand.splice(handIndexofCard, 1);
-      var index2 = 0;
-      $('#player-2-hand').empty();
-      newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p1' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
-    });
-
-    } else {
-      console.log("else");
-    }
-      console.log(newGame.board.p1Hand);
+    console.log(this);
   } else {
-      console.log("else");
+    console.log("else");
   }
 });
