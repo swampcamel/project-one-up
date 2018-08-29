@@ -206,8 +206,8 @@ $(document).ready(function(){
       newGame.startGame();
       var index1 = 0;
       var index2 = 0;
-      $('.p2Field').each(function () {
-        this.addClass('unclickable');
+      $('.p2field').each(function () {
+        $(this).addClass('unclickable');
       });
       $('#player-2-hand').addClass('unclickable');
       $("#player-2-info .end-turn").addClass('hidden');
@@ -277,6 +277,7 @@ $(document).on('click', '.hand-cards', function() {
 });
 
 $(document).on('click', '.board-lanes', function() {
+// active hand circumstance
   if ($(".hand-cards").hasClass("active-card")) {
     $(".active-card").appendTo(this);
     var handIndexofCard = $(".active-card").attr("id");
@@ -314,10 +315,22 @@ $(document).on('click', '.board-lanes', function() {
     } else {
       console.log("else");
     }
-      console.log(newGame.board);
-    } else if ($(this).hasClass("active-field")) {
-      $(this).removeClass("active-field");
-    } else if ($(this).find("div").hasClass("field-cards")) {
-      $(this).addClass("active-field")
+
+    console.log(newGame.board);
+// field circumstances
+  } else if ($(this).hasClass("active-field")) {
+    $(this).removeClass("active-field");
+
+  } else if ($(this).find("div").hasClass("field-cards")) {
+    $(this).addClass("active-field");
+    if (newGame.activePlayer == 1) {
+      $(".p2field").each(function() {
+        $(".p2field").removeClass("unclickable");
+    });
+  } else if (newGame.activePlayer == 2) {
+      $(".p1field").each(function() {
+        $(".12field").removeClass("unclickable");
+      });
+    }
   }
 });
