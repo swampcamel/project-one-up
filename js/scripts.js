@@ -162,7 +162,9 @@ Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1
   }
 };
 
-function endTurn()
+function endTurn() {
+  
+};
 
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
 //begin user interface
