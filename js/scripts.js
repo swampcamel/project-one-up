@@ -9,6 +9,19 @@ function Game() {
   this.turnCount = 1; //just putting this in for future use
   this.board;
 };
+Player.prototype.damage = function(attackingCard) {
+    this.hp -= attackingCard.damage;
+    console.log(this.hp);
+    loseCondition();
+}
+
+function loseCondition() {
+  for (i = 0; i < 2; i++)
+  if (newGame.players[i].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
+    alert(newGame.players[i].name + " is dead");
+  }
+  return false;
+}
 
 function Board() {
   this.p1Deck = []; //each player has a generated and shuffled deck
