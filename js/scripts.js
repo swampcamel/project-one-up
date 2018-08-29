@@ -162,6 +162,7 @@ Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1
   }
 };
 
+
 function endTurn(gameObj) {
   // switch clickability
   if (gameObj.activePlayer === 1) {
@@ -178,7 +179,6 @@ function endTurn(gameObj) {
   // console.log("p1 " + gameObj.board.p1Hand + " ps2 " + gameObj.board.p2Hand);
   gameObj.turnCount += 1;
   // console.log("turn " + gameObj.turnCount);
-};
 
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
 
@@ -193,11 +193,15 @@ $(document).ready(function(){
   $("#new-game").click(function() {
       newGame = new Game();
       newGame.startGame();
+      var index1 = 0;
+      var index2 = 0;
       newGame.board.p1Hand.forEach(function(card) {
-        $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+        index1++;
       });
       newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+        $('#player-2-hand').append('<div id=\"p1' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+        index2++;
       });
       $('#new-game').hide();
   });
@@ -221,10 +225,35 @@ $(document).on('click', '.hand-cards', function() {
 $(document).on('click', '.board-lanes', function() {
   if ($(".hand-cards").hasClass("active-card")) {
     $(".active-card").appendTo(this);
+    var handIndexofCard = $(".active-card").attr("id");
+    handIndexofCard = handIndexofCard.split("");
+    handIndexofCard = handIndexofCard[2];
+    console.log(handIndexofCard);
     $(".active-card").removeClass("active-card");
 
-    console.log(newGame.board);
+    if (newGame.activePlayer == 1) {
+      newGame.board.p1Hand.splice(handIndexofCard, 1);
+      var index1 = 0;
+      $('#player-1-hand').empty();
+      newGame.board.p1Hand.forEach(function(card) {
+        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+        index1++;
+      });
+
+    } else if (newGame.activePlayer == 2) {
+      newGame.board.p2Hand.splice(handIndexofCard, 1);
+      var index2 = 0;
+      $('#player-2-hand').empty();
+      newGame.board.p2Hand.forEach(function(card) {
+        $('#player-2-hand').append('<div id=\"p1' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+        index1++;
+    });
+
+    } else {
+      console.log("else");
+    }
+      console.log(newGame.board.p1Hand);
   } else {
-    console.log("else");
+      console.log("else");
   }
 });
