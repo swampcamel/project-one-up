@@ -5,7 +5,7 @@ function Game() {
   this.players = []; //array of player objects
   this.activePlayer = 1;
   this.winner = "";
-  this.turnCount = 1; //just putting this in for future use
+  this.roundCount = 0; //just putting this in for future use
   this.board;
 };
 
@@ -27,7 +27,7 @@ function Player(input) {
 Player.prototype.Damage = function(attackingCard) {
     this.hp -= attackingCard.damage;
     console.log(this.hp);
-    console.log(loseCondition());
+    loseCondition();
 }
 
 function loseCondition() {
@@ -118,14 +118,14 @@ Board.prototype.shuffleCards = function (deck) {
   return deck;
 };
 
-Game.prototype.drawCards = function () {
-   if (this.activePlayer === 1) {
-     var drawnCard = this.board.p1Deck.pop();
-     this.board.p1Hand.push(drawnCard);
+Board.prototype.drawCards = function (gameObj) {
+   if (gameObj.activePlayer === 1) {
+     var drawnCard = this.p1Deck.pop();
+     this.p1Hand.push(drawnCard);
    }
-   else if (this.activePlayer === 2) {
-     var drawnCard = this.board.p2Deck.pop();
-     this.board.p2Hand.push(drawnCard);
+   else if (gameObj.activePlayer === 2) {
+     var drawnCard = this.p2Deck.pop();
+     this.p2Hand.push(drawnCard);
    } else {
      alert("drawCards ERROR!");
    }
@@ -175,26 +175,7 @@ Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1
   }
 };
 
-function endTurn(gameObj) {
-  // switch clickability
-  if (gameObj.activePlayer === 1) {
-    gameObj.activePlayer = 2;
-  } else if (gameObj.activePlayer === 2) {
-    gameObj.activePlayer = 1;
-  } else {
-    alert("endTurn player switch ERROR!");
-  }
-  // begin new active player turn
-  // active player draws card
-  gameObj.drawCards();
-  // console.log("active player = " + gameObj.activePlayer);
-  // console.log("p1 " + gameObj.board.p1Hand + " ps2 " + gameObj.board.p2Hand);
-  gameObj.turnCount += 1;
-  // console.log("turn " + gameObj.turnCount);
-
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
-
-
 //begin user interface
 $(document).ready(function(){
 
@@ -210,20 +191,11 @@ $(document).ready(function(){
         $('#player-1-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
       });
       newGame.board.p2Hand.forEach(function(card) {
-      $('#player-2-hand').append('<div id=\"p2' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index2++;
+        $('#player-2-hand').prepend('<div class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
       });
       $('#new-game').hide();
-      $('#player-2-hand').addClass("unclickable");
-      $('.p2field').each(function() {
-        $(this).addClass("unclickable");
-      });
-  });
-  $(".end-turn").click(function(){
-    endTurn(newGame);
   });
 });
-
 
 $(document).on('click', '.hand-cards', function() {
   if ($(this).hasClass("active-card")) {
@@ -239,35 +211,8 @@ $(document).on('click', '.hand-cards', function() {
 $(document).on('click', '.board-lanes', function() {
   if ($(".hand-cards").hasClass("active-card")) {
     $(".active-card").appendTo(this);
-    var handIndexofCard = $(".active-card").attr("id");
-    handIndexofCard = handIndexofCard.split("");
-    handIndexofCard = handIndexofCard[2];
-    console.log(handIndexofCard);
-    $(".active-card").addClass("lane-cards")
-    $(".active-card").removeClass("active-card hand-cards");
-
-    if (newGame.activePlayer == 1) {
-      newGame.board.p1Hand.splice(handIndexofCard, 1);
-      var index1 = 0;
-      $('#player-1-hand').empty();
-      newGame.board.p1Hand.forEach(function(card) {
-        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
-      });
-
-    } else if (newGame.activePlayer == 2) {
-      newGame.board.p2Hand.splice(handIndexofCard, 1);
-      var index2 = 0;
-      $('#player-2-hand').empty();
-      newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p2' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
-    });
-    } else {
-      console.log("else");
-    }
-    console.log(newGame.board.p1Hand);
     $(".active-card").removeClass("active-card");
+    console.log(this);
   } else {
     console.log("else");
   }
