@@ -237,6 +237,7 @@ $(document).ready(function(){
       });
       $('#player-2-hand').addClass('unclickable');
       $("#player-2-info .end-turn").addClass('hidden');
+      $("#player-1-info").addClass("highlight");
       newGame.board.p1Hand.forEach(function(card) {
         $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
         index1++;
@@ -256,11 +257,13 @@ $(document).ready(function(){
       });
       $('#player-2-hand').addClass('unclickable');
       $("#player-2-info .end-turn").addClass('hidden');
+      $("#player-1-info").addClass("highlight");
       $('.p1Field').each(function () {
         this.removeClass('unclickable');
       });
       $('#player-1-hand').removeClass('unclickable');
       $("#player-1-info .end-turn").removeClass('hidden');
+      $("#player-2-info").removeClass("highlight");
       var index1 = 0;
       $('#player-1-hand').empty();
       newGame.board.p1Hand.forEach(function(card) {
@@ -273,11 +276,13 @@ $(document).ready(function(){
       });
       $('#player-1-hand').addClass('unclickable');
       $("#player-1-info .end-turn").addClass('hidden');
+      $("#player-2-info").addClass("highlight");
       $('.p2Field').each(function () {
         this.removeClass('unclickable');
       });
       $('#player-2-hand').removeClass('unclickable');
       $("#player-2-info .end-turn").removeClass('hidden');
+      $("#player-1-info").removeClass("highlight");
       var index2 = 0;
       $('#player-2-hand').empty();
       newGame.board.p2Hand.forEach(function(card) {
