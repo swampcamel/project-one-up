@@ -173,7 +173,7 @@ forceDraw = function (gameObj) {
       gameObj.board.p1Graveyard.push(drawnCard);
     }
   }
-  if (gameObj.activePlayer === 1) {
+  else if (gameObj.activePlayer === 1) {
     if (gameObj.board.p2Hand.length < 8) {
       var drawnCard = gameObj.board.p2Deck.pop();
       gameObj.board.p2Hand.push(drawnCard);
