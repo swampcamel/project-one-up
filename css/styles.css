@@ -245,3 +245,11 @@ html, body {
 .active-card {
   border: 4px solid blue;
 }
+
+.unclickable {
+  pointer-events: none;
+}
+
+.field-cards {
+
+}

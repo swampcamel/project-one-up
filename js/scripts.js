@@ -163,7 +163,7 @@ Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1
 };
 
 function endTurn() {
-  
+
 };
 
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
@@ -184,10 +184,14 @@ $(document).ready(function(){
         index1++;
       });
       newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p1' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+        $('#player-2-hand').append('<div id=\"p2' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
         index2++;
       });
       $('#new-game').hide();
+      $('#player-2-hand').addClass("unclickable");
+      $('.p2field').each(function() {
+        $(this).addClass("unclickable");
+      });
   });
 });
 
@@ -209,7 +213,8 @@ $(document).on('click', '.board-lanes', function() {
     handIndexofCard = handIndexofCard.split("");
     handIndexofCard = handIndexofCard[2];
     console.log(handIndexofCard);
-    $(".active-card").removeClass("active-card");
+    $(".active-card").addClass("lane-cards")
+    $(".active-card").removeClass("active-card hand-cards");
 
     if (newGame.activePlayer == 1) {
       newGame.board.p1Hand.splice(handIndexofCard, 1);
@@ -225,7 +230,7 @@ $(document).on('click', '.board-lanes', function() {
       var index2 = 0;
       $('#player-2-hand').empty();
       newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p1' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+        $('#player-2-hand').append('<div id=\"p2' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
         index1++;
     });
 
