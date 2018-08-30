@@ -249,6 +249,16 @@ function showHandCards(gameObj) {
   });
 };
 
+function changeBoard(brdIndex) {
+  var coordGrabber = brdIndex.split("");
+  coordGrabber = coordGrabber[2];
+  var card1 = newGame.board.p1Field[coordGrabber]
+  var card2 = newGame.board.p2Field[coordGrabber]
+  newGame.board.p1Graveyard.push(card1);
+  newGame.board.p2Graveyard.push(card2);
+  newGame.board.p1Field[coordGrabber] = undefined;
+  newGame.board.p2Field[coordGrabber] = undefined;
+}
 
 $(document).ready(function(){
 
@@ -322,16 +332,8 @@ $(document).on('click', '.board-lanes', function() {
     && ($(this).find("div").hasClass("field-cards"))
      && ($(".p1field").hasClass("active-field"))) {
        // SORRY FOR THE CHEAT BIZ LOGIC WILL REFACTOR
-       var boardIndex = $(this).attr("id");
-       boardIndex = boardIndex.split("");
-       boardIndex = boardIndex[2];
-       var card1 = newGame.board.p1Field[boardIndex]
-       var card2 = newGame.board.p2Field[boardIndex]
-       console.log(card1);
-       newGame.board.p1Graveyard.push(card1);
-       newGame.board.p2Graveyard.push(card2);
-       newGame.board.p1Field[boardIndex] = undefined;
-       newGame.board.p2Field[boardIndex] = undefined;
+     var boardIndex = $(this).attr("id");
+     changeBoard(boardIndex);
       $(this).empty();
       $(".active-field").find(".field-cards").remove();
       $(".active-field").removeClass("active-field");
@@ -341,18 +343,15 @@ $(document).on('click', '.board-lanes', function() {
       && ($(this).find("div").hasClass("field-cards"))
        && ($(".p2field").hasClass("active-field"))) {
          var boardIndex = $(this).attr("id");
-         boardIndex = boardIndex.split("");
-         boardIndex = boardIndex[2];
-         var card1 = newGame.board.p1Field[boardIndex]
-         var card2 = newGame.board.p2Field[boardIndex]
-         newGame.board.p1Graveyard.push(card1);
-         newGame.board.p2Graveyard.push(card2);
-         newGame.board.p1Field[boardIndex] = undefined;
-         newGame.board.p2Field[boardIndex] = undefined;
+         changeBoard(boardIndex);
          $(this).empty();
          $(".active-field").find(".field-cards").remove();
          $(".active-field").removeClass("active-field");
          console.log("SUCCESS");
+
+
+
+
   } else if ($(".board-lanes").hasClass("active-field")) {
     $(".board-lanes").each(function() {
       $(".board-lanes").removeClass("active-field");
