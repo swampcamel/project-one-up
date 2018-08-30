@@ -66,7 +66,7 @@ Diabolis is a two-player card game inspired by such games as Magic: The Gatherin
 - Card Template: [`TCG Template 01` by a-ravlik](https://graphicriver.net/item/tcg-template-01/21359870?ref=KlitVogli&clickthrough_id=1382660938&redirect_back=true)
   - Licensed under [Graphic River's standard license](https://graphicriver.net/licenses/standard?license=regular)
 - Fire Brush: Fire by [elestrial](www.amaranthdreams.com)
-- PLayer Hand Backgrounds: [Metal Seamless Textures Pack 4 by jojo_ojoj](https://www.deviantart.com/jojo-ojoj)
+- Player Hand Backgrounds: [Metal Seamless Textures Pack 4 by jojo_ojoj](https://www.deviantart.com/jojo-ojoj)
   - Licensed under [Attribution 3.0 Unported (CC BY 3.0) License](https://creativecommons.org/licenses/by/3.0/)
 - Music: [Solar Fractal by Quarkstar](http://dig.ccmixter.org/files/Quarkstar/57874)
   - (c) copyright 2018 Licensed under a [Creative Commons Attribution (3.0) license](https://creativecommons.org/licenses/by/3.0/).
