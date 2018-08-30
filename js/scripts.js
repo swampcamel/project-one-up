@@ -18,9 +18,11 @@ Player.prototype.damage = function(attackingCard) {
 
 function loseCondition() {
   if (newGame.players[0].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
-    alert(newGame.players[0].name + " is dead");
+    // alert(newGame.players[0].name + " is dead");
+    alert("Player 1 is dead.");
   } else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
-    alert(newGame.players[1].name + " is dead");
+    // alert(newGame.players[1].name + " is dead");
+    alert("Player 2 is dead.");
   }
   return false;
 }
@@ -451,5 +453,19 @@ $(document).on('click', '.board-lanes', function() {
 }
 });
 
-$(document).on('click', '.board-lanes', function() {
-  if ((newGame.activePlayer == 1)
+$(document).on('click', '.player-icons', function() {
+  if (($(this).attr("id") == "player-2-deck") && (newGame.activePlayer == 1) && ($('.p1field').hasClass("active-field"))) {
+    newGame.players[1].hp -= 1;
+    $("#p2-hp-count").text(newGame.players[1].hp);
+    loseCondition();
+    $(".active-field").addClass("unclickable");
+    $(".active-field").removeClass("active-field")
+  } else if (($(this).attr("id") == "player-1-deck") && (newGame.activePlayer == 2) && ($('.p2field').hasClass('active-field'))) {
+    newGame.players[0].hp -= 1;
+    $("#p2-hp-count").text(newGame.players[0].hp);
+    loseCondition();
+    console.log("Boom!")
+  } else {
+    console.log("Nothing happens...");
+  }
+});
