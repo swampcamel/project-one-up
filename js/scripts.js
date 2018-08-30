@@ -231,21 +231,18 @@ function endTurn(gameObj) {
 }
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
 
-
+//begin user interface
 //front end functions
 function showHandCards(gameObj) {
 
   var index1 = 0;
   var index2 = 0;
-
   $('#player-1-hand').empty();
   $('#player-2-hand').empty();
-
   gameObj.board.p1Hand.forEach(function(card) {
     $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
     index1++;
   });
-
   gameObj.board.p2Hand.forEach(function(card) {
     $('#player-2-hand').append('<div id=\"p2' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
     index2++;
@@ -263,28 +260,18 @@ function changeBoard(brdIndex) {
   newGame.board.p2Field[coordGrabber] = undefined;
 }
 
-//begin user interface
 $(document).ready(function(){
 
   $("#new-game").click(function() {
       newGame = new Game();
       newGame.startGame();
-      var index1 = 0;
-      var index2 = 0;
+      showHandCards(newGame);
       $('.p2field').each(function () {
         $(this).addClass('unclickable');
       });
       $('#player-2-hand').addClass('unclickable');
       $("#player-2-info .end-turn").addClass('hidden');
       $("#player-1-info").addClass("highlight");
-      newGame.board.p1Hand.forEach(function(card) {
-        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
-      });
-      newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p1' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index2++;
-      });
       $('#new-game').hide();
   });
 
@@ -303,12 +290,8 @@ $(document).ready(function(){
       $('#player-1-hand').removeClass('unclickable');
       $("#player-1-info .end-turn").removeClass('hidden');
       $("#player-2-info").removeClass("highlight");
-      var index1 = 0;
       $('#player-1-hand').empty();
-      newGame.board.p1Hand.forEach(function(card) {
-        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
-      });
+      showHandCards(newGame);
 
     } else if (newGame.activePlayer === 2) {
       $('.p1field').each(function () {
@@ -323,12 +306,8 @@ $(document).ready(function(){
       $('#player-2-hand').removeClass('unclickable');
       $("#player-2-info .end-turn").removeClass('hidden');
       $("#player-1-info").removeClass("highlight");
-      var index2 = 0;
       $('#player-2-hand').empty();
-      newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p2' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index2++;
-      });
+      showHandCards(newGame);
     } else {
       alert("end turn interface error");
     }
