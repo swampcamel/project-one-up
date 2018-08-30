@@ -279,6 +279,7 @@ $(document).ready(function(){
       $('#player-2-hand').addClass('unclickable');
       $("#player-2-info .end-turn").addClass('hidden');
       $("#player-1-info").addClass("highlight");
+      $("#player-2-info").addClass("small-fire");
       $('#new-game').hide();
   });
 
@@ -291,12 +292,14 @@ $(document).ready(function(){
       $('#player-2-hand').addClass('unclickable');
       $("#player-2-info .end-turn").addClass('hidden');
       $("#player-1-info").addClass("highlight");
+      $("#player-2-info").addClass("small-fire");
       $('.p1field').each(function () {
         $(this).removeClass('unclickable');
       });
       $('#player-1-hand').removeClass('unclickable');
       $("#player-1-info .end-turn").removeClass('hidden');
       $("#player-2-info").removeClass("highlight");
+      $("#player-1-info").removeClass("small-fire");
       $('#player-1-hand').empty();
       showHandCards(newGame);
 
@@ -307,12 +310,14 @@ $(document).ready(function(){
       $('#player-1-hand').addClass('unclickable');
       $("#player-1-info .end-turn").addClass('hidden');
       $("#player-2-info").addClass("highlight");
+      $("#player-1-info").addClass("small-fire");
       $('.p2field').each(function () {
         $(this).removeClass('unclickable');
       });
       $('#player-2-hand').removeClass('unclickable');
       $("#player-2-info .end-turn").removeClass('hidden');
       $("#player-1-info").removeClass("highlight");
+      $("#player-2-info").removeClass("small-fire");
       $('#player-2-hand').empty();
       showHandCards(newGame);
     } else {

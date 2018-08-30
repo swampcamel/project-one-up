@@ -46,9 +46,8 @@ html, body {
   color: #E6A71F;
   grid-area: player-1-info;
   background-color: black;
-  background-repeat:no-repeat; */
-  background-size:100%;
-  background-position:left bottom;
+  background-repeat:no-repeat;
+  background-position:center bottom;
   padding-left: 15px;
   background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);
 }
@@ -57,9 +56,8 @@ html, body {
   color: #E6A71F;
   grid-area: player-2-info;
   background-color: black;
-  background-repeat:no-repeat; */
-  background-size:100%;
-  background-position:left bottom;
+  background-repeat:no-repeat;
+  background-position:center bottom;
   padding-left: 15px;
   background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);
  }
@@ -278,27 +276,31 @@ html, body {
   /* reserved for future styling of lanes */
  }
 
- .hidden {
-   display: none;
+.hidden {
+ display: none;
+}
+
+.highlight {
+ text-shadow: 3px 3px 3px rgba(230,167,31,.8);
+ text-decoration: underline;
+ animation: glow .5s linear infinite;
+}
+
+.small-fire {
+  background-size: 100%;
+}
+
+@keyframes glow {
+ 0% {
+
  }
-
- .highlight {
-   text-shadow: 3px 3px 3px rgba(230,167,31,.8);
-   text-decoration: underline;
-   animation: glow .5s linear infinite;
+ 50% {
+   text-shadow: 3px 3px 5px red;
  }
+ 100% {
 
- @keyframes glow {
-   0% {
-
-   }
-   50% {
-     text-shadow: 3px 3px 5px red;
-   }
-   100% {
-
-   }
  }
+}
 
 #audio-toggle {
   position: absolute;
