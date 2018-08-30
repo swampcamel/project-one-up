@@ -337,7 +337,8 @@ $(document).on('click', '.board-lanes', function() {
   if ((newGame.activePlayer == 1)
    && ($(this).hasClass("p2field"))
     && ($(this).find("div").hasClass("field-cards"))
-     && ($(".field-cards").hasClass("active-field"))) {
+     && ($(".p1field").hasClass("active-field"))) {
+       // SORRY FOR THE CHEAT BIZ LOGIC WILL REFACTOR
        var boardIndex = $(this).attr("id");
        boardIndex = boardIndex.split("");
        boardIndex = boardIndex[2];
@@ -349,7 +350,7 @@ $(document).on('click', '.board-lanes', function() {
        newGame.board.p1Field[boardIndex] = undefined;
        newGame.board.p2Field[boardIndex] = undefined;
       $(this).empty();
-      $(".active-field").remove();
+      $(".active-field").find(".field-cards").remove();
       $(".active-field").removeClass("active-field");
        console.log("SUCCESS");
   } else if ((newGame.activePlayer == 2)
@@ -371,7 +372,7 @@ $(document).on('click', '.board-lanes', function() {
          console.log("SUCCESS");
   }
 // active hand circumstance
-  if ($(".hand-cards").hasClass("active-card")) {
+  if (($(".hand-cards").hasClass("active-card")) && !($(this).find("div").hasClass("field-cards"))) {
     $(".active-card").appendTo(this);
     var handIndexofCard = $(".active-card").attr("id");
     var boardIndex = $(this).attr("id");
