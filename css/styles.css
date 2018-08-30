@@ -32,10 +32,6 @@ html, body {
   /* justify-content: space-between; */
 }
 
-/* #new-game {
-  display: none;
-} */
-
 .end-turn {
   margin-top: 75px;
   text-align: center;
@@ -74,6 +70,7 @@ html, body {
   background-image: url("../img/handbg.png");
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 281px;
 }
 
 #player-1-hand img {
@@ -88,6 +85,7 @@ html, body {
   background-image: url("../img/handbg2.png");
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 281px;
 }
 
 .board-decks, .player-icons {
@@ -98,6 +96,8 @@ html, body {
 }
 
 .board-decks img, .player-icons img {
+  min-width: 150px;
+  min-height: 200px;
   max-width: 50%;
   height: auto;
   position: absolute;

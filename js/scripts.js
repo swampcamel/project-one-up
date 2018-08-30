@@ -167,9 +167,11 @@ function loseCondition() {
   if (newGame.players[0].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
     // alert(newGame.players[0].name + " is dead");
     alert("Player 1 is dead.");
+    showStart();
   } else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
     // alert(newGame.players[1].name + " is dead");
     alert("Player 2 is dead.");
+    showStart();
   }
   return false;
 }
@@ -228,7 +230,6 @@ function endTurn(gameObj) {
 //begin user interface
 //front end functions
 function showHandCards(gameObj) {
-
   var index1 = 0;
   var index2 = 0;
   $('#player-1-hand').empty();
@@ -449,3 +450,7 @@ $(document).on('click', '.player-icons', function() {
     console.log("Nothing happens...");
   }
 });
+
+function showStart() {
+  $("#new-game").show();
+}
