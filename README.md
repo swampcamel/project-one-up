@@ -86,6 +86,8 @@ Diabolis is a two-player card game inspired by such games as Magic: The Gatherin
   - Licensed under [Attribution 3.0 Unported (CC BY 3.0) License](https://creativecommons.org/licenses/by/3.0/)
 - Music: [Solar Fractal by Quarkstar](http://dig.ccmixter.org/files/Quarkstar/57874)
   - (c) copyright 2018 Licensed under a [Creative Commons Attribution (3.0) license](https://creativecommons.org/licenses/by/3.0/).
+- Cloud & Star Assets: https://codepen.io/WebSonick/pen/vjmgu
+- Animations by [Animista](http://animista.net/)
 
 ### License
 This software is licensed under [GNU GPLv3](LICENSE.txt).
