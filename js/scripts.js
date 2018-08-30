@@ -10,23 +10,6 @@ function Game() {
   this.board;
 };
 
-Player.prototype.damage = function(attackingCard) {
-  this.hp -= attackingCard.damage;
-  loseCondition();
-  return this.hp;
-}
-
-function loseCondition() {
-  if (newGame.players[0].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
-    // alert(newGame.players[0].name + " is dead");
-    alert("Player 1 is dead.");
-  } else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
-    // alert(newGame.players[1].name + " is dead");
-    alert("Player 2 is dead.");
-  }
-  return false;
-}
-
 function Board() {
   this.p1Deck = []; //each player has a generated and shuffled deck
   this.p1Hand = []; //hands are filled from respective decks
@@ -38,11 +21,6 @@ function Board() {
   this.p2Graveyard = [];
 };
 
-function Player(input) {
-  this.name = input;
-  this.hp = 10;
-};
-
 function Card(damage, health, name, ability, text, flavor){
 
   this.damage = damage;
@@ -52,10 +30,6 @@ function Card(damage, health, name, ability, text, flavor){
   this.abilityText = "";
   this.flavorText= "flavor";
 
-  cardRepo.push(this);
-};
-
-Card.prototype.fillCardRepo = function () {
   cardRepo.push(this);
 };
 
@@ -98,6 +72,30 @@ Game.prototype.startGame = function (input1, input2) {
   this.board.p2Hand = this.board.p2Deck.splice((this.board.p2Deck.length-6), 5);
 };
 
+Game.prototype.drawCards = function () {
+  loseCondition();
+
+  if (this.activePlayer === 1) {
+    if (this.board.p1Hand.length < 8) {
+      var drawnCard = this.board.p1Deck.pop();
+      this.board.p1Hand.push(drawnCard);
+    } else {
+      var drawnCard = this.board.p1Deck.pop();
+      this.board.p1Graveyard.push(drawnCard);
+    }
+  } else if (this.activePlayer === 2) {
+    if (this.board.p2Hand.length < 8) {
+      var drawnCard = this.board.p2Deck.pop();
+      this.board.p2Hand.push(drawnCard);
+    } else {
+      var drawnCard = this.board.p2Deck.pop();
+      this.board.p2Graveyard.push(drawnCard);
+    }
+  } else {
+    alert("drawCard ERROR!");
+  }
+};
+
 Board.prototype.buildDeck = function (cardRepo) {
   var iterations = 30 / cardRepo.length;
 
@@ -123,33 +121,6 @@ Board.prototype.shuffleCards = function (deck) {
   return deck;
 };
 
-Game.prototype.drawCards = function () {
-  // debugger
-  loseCondition();
-
-  if (this.activePlayer === 1) {
-    if (this.board.p1Hand.length < 8) {
-      var drawnCard = this.board.p1Deck.pop();
-      this.board.p1Hand.push(drawnCard);
-    } else {
-      var drawnCard = this.board.p1Deck.pop();
-      this.board.p1Graveyard.push(drawnCard);
-    }
-  } else if (this.activePlayer === 2) {
-    if (this.board.p2Hand.length < 8) {
-      var drawnCard = this.board.p2Deck.pop();
-      this.board.p2Hand.push(drawnCard);
-    } else {
-      var drawnCard = this.board.p2Deck.pop();
-      this.board.p2Graveyard.push(drawnCard);
-    }
-  } else {
-    console.log(this.activePlayer);
-     alert("drawCard ERROR!");
-  }
-};
-
-
 Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
   if (gameObj.activePlayer === 1) {
     var playedCard = this.p1Hand.splice(handIndex, 1);
@@ -162,7 +133,52 @@ Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
   }
 };
 
-forceDraw = function (gameObj) {
+Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1 and 2 are array locations from the player fields
+  var array1 = boardObj.p1Field;
+  var array2 = boardObj.p2Field;
+  var attacker = boardObj.p1Field[index];
+  var defender = boardObj.p2Field[index];
+  attacker.health = attacker.health - defender.damage;
+  defender.health = defender.health - attacker.damage;
+  if (attacker.health <= 0) {
+    var p1Dead = Board.p1Field[index];
+    Board.p1Field[index] = undefined;
+    boardObj.p1Graveyard.push(p1Dead);
+  }
+  if (defender.health <= 0) {
+    var p2Dead = Board.p2Field[index];
+    Board.p2Field[index] = undefined;
+    boardObj.p2Graveyard.push(p2Dead);
+  }
+};
+
+Player.prototype.damage = function(attackingCard) {
+  this.hp -= attackingCard.damage;
+  loseCondition();
+  return this.hp;
+}
+
+Card.prototype.fillCardRepo = function () {
+  cardRepo.push(this);
+};
+
+function loseCondition() {
+  if (newGame.players[0].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
+    // alert(newGame.players[0].name + " is dead");
+    alert("Player 1 is dead.");
+  } else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
+    // alert(newGame.players[1].name + " is dead");
+    alert("Player 2 is dead.");
+  }
+  return false;
+}
+
+function Player(input) {
+  this.name = input;
+  this.hp = 10;
+};
+
+function forceDraw (gameObj) {
   loseCondition();
   if (gameObj.activePlayer === 2) {
     if (gameObj.board.p1Hand.length < 8) {
@@ -191,26 +207,6 @@ forceDraw = function (gameObj) {
 
 };
 
-Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1 and 2 are array locations from the player fields
-  var array1 = boardObj.p1Field;
-  var array2 = boardObj.p2Field;
-  var attacker = boardObj.p1Field[index];
-  var defender = boardObj.p2Field[index];
-  attacker.health = attacker.health - defender.damage;
-  defender.health = defender.health - attacker.damage;
-  if (attacker.health <= 0) {
-    var p1Dead = Board.p1Field[index];
-    Board.p1Field[index] = undefined;
-    boardObj.p1Graveyard.push(p1Dead);
-  }
-  if (defender.health <= 0) {
-    var p2Dead = Board.p2Field[index];
-    Board.p2Field[index] = undefined;
-    boardObj.p2Graveyard.push(p2Dead);
-  }
-};
-
-
 function endTurn(gameObj) {
   // switch clickability
   if (gameObj.activePlayer === 1) {
@@ -223,13 +219,10 @@ function endTurn(gameObj) {
   // begin new active player turn
   // active player draws card
   gameObj.drawCards();
-  // console.log("active player = " + gameObj.activePlayer);
-  // console.log("p1 " + gameObj.board.p1Hand + " ps2 " + gameObj.board.p2Hand);
   gameObj.turnCount += 1;
   loseCondition();
-  // console.log("turn " + gameObj.turnCount);
 }
-var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
+
 
 //begin user interface
 //front end functions
@@ -331,13 +324,11 @@ $(document).on('click', '.board-lanes', function() {
    && ($(this).hasClass("p2field"))
     && ($(this).find("div").hasClass("field-cards"))
      && ($(".p1field").hasClass("active-field"))) {
-       // SORRY FOR THE CHEAT BIZ LOGIC WILL REFACTOR
      var boardIndex = $(this).attr("id");
      changeBoard(boardIndex);
       $(this).empty();
       $(".active-field").find(".field-cards").remove();
       $(".active-field").removeClass("active-field");
-       console.log("SUCCESS");
   } else if ((newGame.activePlayer == 2)
      && ($(this).hasClass("p1field"))
       && ($(this).find("div").hasClass("field-cards"))
@@ -347,11 +338,6 @@ $(document).on('click', '.board-lanes', function() {
          $(this).empty();
          $(".active-field").find(".field-cards").remove();
          $(".active-field").removeClass("active-field");
-         console.log("SUCCESS");
-
-
-
-
   } else if ($(".board-lanes").hasClass("active-field")) {
     $(".board-lanes").each(function() {
       $(".board-lanes").removeClass("active-field");
@@ -366,7 +352,6 @@ $(document).on('click', '.board-lanes', function() {
     boardIndex = boardIndex[2];
     handIndexofCard = handIndexofCard.split("");
     handIndexofCard = handIndexofCard[2];
-    console.log(handIndexofCard);
     $(".active-card").addClass("field-cards");
     $(".active-card").removeClass("active-card hand-cards");
     forceDraw(newGame);
@@ -401,7 +386,6 @@ $(document).on('click', '.board-lanes', function() {
       console.log("else");
     }
 
-    console.log(newGame.board);
 // field circumstances
   // If you click on a field card that is already highlighted
   } else if ($(this).hasClass("active-field")) {
