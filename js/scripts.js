@@ -23,14 +23,13 @@ function Board() {
 };
 
 function Card(damage, health, name, ability, text, flavor, monsterNumber){
-
   this.damage = damage;
   this.health = health;
   this.monsterName =  name;
   this.ability = "";
   this.abilityText = "";
   this.flavorText= "flavor";
-  this.image = "img/monster" + monsterNumber + ".jpg"
+  this.image = "img/monster" + monsterNumber + ".png"
 
   cardRepo.push(this);
 };
