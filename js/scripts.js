@@ -1,6 +1,7 @@
 //backend (game) logic
 var cardRepo = [];
 var newGame;
+var bgMusic = new Audio("audio/bgmusic.mp3");
 
 function Game() {
   this.players = []; //array of player objects
@@ -255,6 +256,18 @@ function changeBoard(brdIndex) {
 
 $(document).ready(function(){
 
+  $("#audio-toggle").click(function() {
+    $("#audio-toggle").toggleClass('music-on');
+    // setTimeout(function() {
+      if($("#audio-toggle").hasClass('music-on')) {
+        bgMusic.play();
+      } else {
+        $("#audio-toggle").removeClass('music-on');
+        bgMusic.pause();
+      }
+    // }, 50);
+  });
+
   $("#new-game").click(function() {
       newGame = new Game();
       newGame.startGame();
@@ -416,8 +429,6 @@ $(document).on('click', '.board-lanes', function() {
           $(".p1field").removeClass("unclickable");
         });
       }
-
-
 }
 });
 
