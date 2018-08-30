@@ -428,7 +428,7 @@ html, body {
 }
 
 .slide-in-top {
-	animation: slide-in-top 1.65s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.3s both;
+	animation: slide-in-top 1.95s cubic-bezier(0.250, 0.460, 0.450, 0.940) 0.7s both;
 }
 
 @keyframes slide-in-top {
@@ -490,7 +490,7 @@ html, body {
 }
 
 .fade-in-fwd {
-	animation: fade-in-fwd 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.4s both;
+	animation: fade-in-fwd 0.6s cubic-bezier(0.390, 0.575, 0.565, 1.000) 2.9s both;
 }
 
 @keyframes fade-in-fwd {

@@ -272,9 +272,11 @@ $(document).ready(function(){
     })
 
     $("#confirm-button").click(function() {
-      $("form").submit();
+      $("form").submit(event);
       event.preventDefault();
-      alert("Wasdasds");
+      alert("Store These Values");
+      $(".landing-page").remove()
+      $(".game-page").show();
     })
 
 
