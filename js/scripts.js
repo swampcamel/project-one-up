@@ -86,8 +86,8 @@ Game.prototype.startGame = function (input1, input2) {
   var monster8 = new Card(2,4, 'Sir Hossius', tauntAbility, "Taunting allows monster to block an additonal creature", "No longer the life of the party");
   var monster11 = new Card(3,4, 'Kirraxus', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For I am become death");
   var monster10 = new Card(3,4, 'Attraxia', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "Roar?");
-  var monster9 = new Card(3,4, 'Unnamable-Spawn', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For the Angel of Death spread his wings on the blast,And breathed in the face of the foe as he passed;And the eyes of the sleepers waxed deadly and chill And their hearts but once heaved, and for ever grew still!");
-  var monster13 = new Card(3,4, 'Epthelius', bleedAbility, "Taunting allows monster to block an additonal creature", "And in thy Silence was his Sentence, And in his Soul a vain repentance, ");
+  // var monster9 = new Card(3,4, 'Unnamable-Spawn', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For the Angel of Death spread his wings on the blast,And breathed in the face of the foe as he passed;And the eyes of the sleepers waxed deadly and chill And their hearts but once heaved, and for ever grew still!");
+  // var monster13 = new Card(3,4, 'Epthelius', bleedAbility, "Taunting allows monster to block an additonal creature", "And in thy Silence was his Sentence, And in his Soul a vain repentance, ");
   //var impCard = new Card("Imp",  function() {forceDraw(newGame, newBoard)}, "When you play this minion, your opponent draws a card.");
 
   this.board.buildDeck(cardRepo);
@@ -459,12 +459,13 @@ $(document).on('click', '.player-icons', function() {
     $("#p2-hp-count").text(newGame.players[1].hp);
     loseCondition();
     $(".active-field").addClass("unclickable");
-    $(".active-field").removeClass("active-field")
-  } else if (($(this).attr("id") == "player-1-deck") && (newGame.activePlayer == 2) && ($('.p2field').hasClass('active-field'))) {
+    $(".active-field").removeClass("active-field");
+  } else if (($(this).attr("id") == "player-1-deck") && (newGame.activePlayer == 2) && ($('.p2field').hasClass("active-field"))) {
     newGame.players[0].hp -= 1;
-    $("#p2-hp-count").text(newGame.players[0].hp);
+    $("#p1-hp-count").text(newGame.players[0].hp);
     loseCondition();
-    console.log("Boom!")
+    $(".active-field").addClass("unclickable");
+    $(".active-field").removeClass("active-field");
   } else {
     console.log("Nothing happens...");
   }
