@@ -14,12 +14,41 @@
 
 <body>
   <div class="landing-page">
-    <div class="logo"><img class="logo" src="img/logo.png"></div>
-    <div class="banner"><img class="banner" src="img/banner.png"></div>
-    <div class="cloud"></div>
+    <div class="logo">
+      <img id="logo" src="img/logo.png">
+    </div>
+    <div class="banner">
+      <img id="banner" class="banner" src="img/banner.png">
+    </div>
+    <div class="banner-blank">
+      <img id="banner-blank" class="banner" src="img/banner-blank.png">
+    </div>
+    <div class="clouds"></div>
     <div class="twinkling"></div>
     <div class="stars"></div>
+    <div id="names-input">
+      <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <textarea id="player-1-input" class="materialize-textarea"></textarea>
+            <label for="player-1-input">Player 1</label>
+          </div>
+          <div class="input-field col s6">
+            <textarea id="player-2-input" class="materialize-textarea"></textarea>
+            <label for="player-2-input">Player 2</label>
+          </div>
+        </div>
+        <a id="confirm-button" type="submit" class="waves-effect waves-light pink darken-4 btn">Confirm</a>
+      </form>
+      </div>
+    </div>
+    <div class="landing-button">
+      <a id="play-button" class="waves-effect waves-light pink darken-4 btn">Play</a>
+    </div>
   </div>
+
+
   <div class="game-page">
     <div class="grid-container">
       <div id="player-1-info">
