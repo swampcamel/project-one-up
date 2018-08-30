@@ -235,11 +235,11 @@ function showHandCards(gameObj) {
   $('#player-1-hand').empty();
   $('#player-2-hand').empty();
   gameObj.board.p1Hand.forEach(function(card) {
-    $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+    $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/monster1.png\"></div>');
     index1++;
   });
   gameObj.board.p2Hand.forEach(function(card) {
-    $('#player-2-hand').append('<div id=\"p2' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+    $('#player-2-hand').append('<div id=\"p2' + index1 +'\" class=\"hand-cards\"><img src=\"img/monster1.png\"></div>');
     index2++;
   });
 };
