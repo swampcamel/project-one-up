@@ -87,15 +87,21 @@ html, body {
 }
 
 .board-decks, .player-icons {
-  /* max-height: 200px;
-  max-width: 200px; */
-  margin-left: 25px;
   position: relative;
 }
 
-.board-decks img, .player-icons img {
+.board-decks img {
   min-width: 150px;
   min-height: 200px;
+  max-width: 50%;
+  height: auto;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+}
+
+.player-icons img {
   max-width: 50%;
   height: auto;
   position: absolute;
