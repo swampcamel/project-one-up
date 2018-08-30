@@ -166,14 +166,14 @@ Card.prototype.fillCardRepo = function () {
 function loseCondition() {
   if (newGame.players[0].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
     // alert(newGame.players[0].name + " is dead");
-    alert("Player 1 is dead.");
+    // alert("Player 1 is dead.");
     showStart();
-    showEnd();
+    showEnd2();
   } else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
     // alert(newGame.players[1].name + " is dead");
-    alert("Player 2 is dead.");
+    // alert("Player 2 is dead.");
     showStart();
-    showEnd();
+    showEnd1();
   }
   return false;
 }
@@ -453,7 +453,7 @@ $(document).on('click', '.player-icons', function() {
     loseCondition();
     $(".active-field").addClass("unclickable");
     $(".active-field").removeClass("active-field");
-  } else {
+  } else {t
     console.log("Nothing happens...");
   }
 });
@@ -462,6 +462,12 @@ function showStart() {
   $("#new-game").show();
 }
 
-function showEnd() {
+function showEnd1() {
   $("#game-over-h1").show();
+  $("#game-over-h3").text("Player 1 wins!");
+}
+
+function showEnd2() {
+  $("#game-over-h1").show();
+  $("#game-over-h3").text("Player 2 wins!");
 }

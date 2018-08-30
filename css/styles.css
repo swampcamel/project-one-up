@@ -322,5 +322,13 @@ html, body {
   left: 25%;
   text-shadow: 5px 5px 5px black;
   z-index: 1;
+}
 
+
+#game-over-h3 {
+  position: absolute;
+  top: 60%;
+  left: 35%;
+  text-shadow: 5px 5px 5px black;
+  z-index: 1;
 }
