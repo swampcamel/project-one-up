@@ -245,12 +245,27 @@ html, body {
   margin: 5px;
 }
 
-.active-card {
-  border: 4px solid blue;
+
+@keyframes active-card-glow {
+  0% { box-shadow: 0 0 30px #F2E80A; }
+  50% { box-shadow: 0 0 60px #F2E80A; }
+  100% { box-shadow: 0 0 30px #F2E80A; }
 }
 
-.active-field {
-  background-color: red;
+@keyframes active-field-glow {
+  0% { box-shadow: 0 0 10px #FF0505; }
+  50% { box-shadow: 0 0 30px #FF0505; }
+  100% { box-shadow: 0 0 10px #FF0505; }
+}
+
+
+.active-card {
+  animation: active-card-glow 2s infinite;
+}
+
+.active-field img {
+  border: 1px solid #FF0505;
+  animation: active-field-glow 2s infinite;
 }
 
 .unclickable {
@@ -258,7 +273,7 @@ html, body {
 }
 
 .field-cards {
-  border: 2px solid yellow;
+  /* reserved for future styling of lanes */
  }
 
  .hidden {
