@@ -168,10 +168,12 @@ function loseCondition() {
     // alert(newGame.players[0].name + " is dead");
     alert("Player 1 is dead.");
     showStart();
+    showEnd();
   } else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
     // alert(newGame.players[1].name + " is dead");
     alert("Player 2 is dead.");
     showStart();
+    showEnd();
   }
   return false;
 }
@@ -458,4 +460,8 @@ $(document).on('click', '.player-icons', function() {
 
 function showStart() {
   $("#new-game").show();
+}
+
+function showEnd() {
+  $("#game-over-h1").show();
 }
