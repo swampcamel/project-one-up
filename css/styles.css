@@ -280,3 +280,157 @@ html, body {
 
    }
  }
+
+/* Landing-Page Styling Below */
+
+.landing-page {
+  display: none;
+}
+
+/* .game-page {
+  display: none;
+} */
+
+@keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-webkit-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-moz-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+@-ms-keyframes move-twink-back {
+    from {background-position:0 0;}
+    to {background-position:-10000px 5000px;}
+}
+
+@keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-webkit-keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-moz-keyframes move-clouds-back {
+    from {background-position:0 0;}
+    to {background-position:10000px 0;}
+}
+@-ms-keyframes move-clouds-back {
+    from {background-position: 0;}
+    to {background-position:10000px 0;}
+}
+
+.stars, .twinkling, .clouds {
+  position:absolute;
+  top:0;
+  left:0;
+  right:0;
+  bottom:0;
+  width:100%;
+  height:100%;
+  display:block;
+}
+
+.stars {
+  background:#000 url("../img/stars.png") repeat top center;
+  z-index:0;
+}
+
+.twinkling{
+  background:transparent url("../img/twinkling.png") repeat top center;
+  z-index:1;
+
+  -moz-animation:move-twink-back 200s linear infinite;
+  -ms-animation:move-twink-back 200s linear infinite;
+  -o-animation:move-twink-back 200s linear infinite;
+  -webkit-animation:move-twink-back 200s linear infinite;
+  animation:move-twink-back 200s linear infinite;
+}
+
+.clouds{
+    background:transparent url("../img/clouds-red.png") repeat top center;
+    z-index:3;
+
+  -moz-animation:move-clouds-back 200s linear infinite;
+  -ms-animation:move-clouds-back 200s linear infinite;
+  -o-animation:move-clouds-back 200s linear infinite;
+  -webkit-animation:move-clouds-back 200s linear infinite;
+  animation:move-clouds-back 200s linear infinite;
+}
+
+.logo{
+  position: absolute;
+  width:64%;
+  height:auto;
+  display:block;
+  z-index:4;
+}
+
+.banner{
+  position: absolute;
+  right: 19%;
+  width:auto;
+  height:100%;
+
+  display: inline-block;
+  z-index:3;
+
+}
+
+.slide-in-top {
+	animation: slide-in-top 1.4s cubic-bezier(0.250, 0.460, 0.450, 0.940) both;
+}
+
+@keyframes slide-in-top {
+  0% {
+    transform: translateY(-1000px);
+    opacity: 0;
+  }
+  100% {
+    transform: translateY(0);
+    opacity: 1;
+  }
+}
+
+.slide-in-blurred-tr {
+	animation: slide-in-blurred-tr 1.25s cubic-bezier(0.230, 1.000, 0.320, 1.000) both;
+}
+
+@keyframes slide-in-blurred-tr {
+  0% {
+    transform: translate(1000px, -1000px) skew(-80deg, -10deg);
+    transform-origin: 0% 0%;
+    filter: blur(40px);
+    opacity: 0;
+  }
+  100% {
+    transform: translate(0, 0) skew(0deg, 0deg);
+    transform-origin: 50% 50%;
+    filter: blur(0);
+    opacity: 1;
+  }
+}
+
+.slide-out-blurred-bl {
+	animation: slide-out-blurred-bl 0.95s cubic-bezier(0.755, 0.050, 0.855, 0.060) both;
+}
+
+@keyframes slide-out-blurred-bl {
+  0% {
+    transform: translate(0, 0) skew(0deg, 0deg);
+    transform-origin: 50% 50%;
+    filter: blur(0);
+    opacity: 1;
+  }
+  100% {
+    transform: translate(-1000px, 1000px) skew(-80deg, -10deg);
+    transform-origin: 100% 100%;
+    filter: blur(40px);
+    opacity: 0;
+  }
+}
