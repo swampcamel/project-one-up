@@ -226,6 +226,7 @@ function endTurn(gameObj) {
   // console.log("active player = " + gameObj.activePlayer);
   // console.log("p1 " + gameObj.board.p1Hand + " ps2 " + gameObj.board.p2Hand);
   gameObj.turnCount += 1;
+  loseCondition();
   // console.log("turn " + gameObj.turnCount);
 }
 var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
