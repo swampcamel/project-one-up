@@ -32,10 +32,6 @@ html, body {
   /* justify-content: space-between; */
 }
 
-/* #new-game {
-  display: none;
-} */
-
 .end-turn {
   margin-top: 75px;
   text-align: center;
@@ -65,7 +61,7 @@ html, body {
   background-size:100%;
   background-position:left bottom;
   padding-left: 15px;
-  background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);  
+  background-image:url(http://78.media.tumblr.com/9951ca2e7e884a48ca5b5269f5514cd6/tumblr_nwjrkxWOcd1tslewgo1_500.gif);
  }
 
 #player-1-hand {
@@ -74,6 +70,7 @@ html, body {
   background-image: url("../img/handbg.png");
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 281px;
 }
 
 #player-1-hand img {
@@ -88,6 +85,7 @@ html, body {
   background-image: url("../img/handbg2.png");
   background-repeat: no-repeat;
   background-size: cover;
+  min-height: 281px;
 }
 
 .board-decks, .player-icons {
