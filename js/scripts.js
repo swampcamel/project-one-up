@@ -373,6 +373,10 @@ $(document).on('click', '.board-lanes', function() {
          $(".active-field").find(".field-cards").remove();
          $(".active-field").removeClass("active-field");
          console.log("SUCCESS");
+  } else if ($(".board-lanes").hasClass("active-field")) {
+    $(".board-lanes").each(function() {
+      $(".board-lanes").removeClass("active-field");
+    });
   }
 // active hand circumstance
   if (($(".hand-cards").hasClass("active-card"))) {
