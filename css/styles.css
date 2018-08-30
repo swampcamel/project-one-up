@@ -88,16 +88,16 @@ html, body {
   background-size: cover;
 }
 
-.board-decks {
+.board-decks, .player-icons {
   /* max-height: 200px;
   max-width: 200px; */
   margin-left: 25px;
   position: relative;
 }
 
-.board-decks img {
-  max-width: 100%;
-  max-height: 100%;
+.board-decks img, .player-icons img {
+  max-width: 50%;
+  height: auto;
   position: absolute;
   top: 50%;
   left: 50%;

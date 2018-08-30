@@ -372,7 +372,7 @@ $(document).on('click', '.board-lanes', function() {
          console.log("SUCCESS");
   }
 // active hand circumstance
-  if (($(".hand-cards").hasClass("active-card")) && !($(this).find("div").hasClass("field-cards"))) {
+  if (($(".hand-cards").hasClass("active-card"))) {
     $(".active-card").appendTo(this);
     var handIndexofCard = $(".active-card").attr("id");
     var boardIndex = $(this).attr("id");
@@ -385,6 +385,7 @@ $(document).on('click', '.board-lanes', function() {
     $(".active-card").removeClass("active-card hand-cards");
     forceDraw(newGame);
     showHandCards(newGame);
+    $(this).addClass("unclickable");
 
     if (newGame.activePlayer == 1) {
       var activeCard = newGame.board.p1Hand.splice(handIndexofCard, 1);
@@ -446,6 +447,9 @@ $(document).on('click', '.board-lanes', function() {
         });
       }
 
-  // If you click on an enemy board spot that has a minion in it while you have an active minion highlighted
+
 }
 });
+
+$(document).on('click', '.board-lanes', function() {
+  if ((newGame.activePlayer == 1)
