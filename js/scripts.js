@@ -1,6 +1,7 @@
 //backend (game) logic
 var cardRepo = [];
 var newGame;
+var bgMusic = new Audio("audio/bgmusic.mp3");
 
 function Game() {
   this.players = []; //array of player objects
@@ -9,23 +10,6 @@ function Game() {
   this.turnCount = 1; //just putting this in for future use
   this.board;
 };
-
-Player.prototype.damage = function(attackingCard) {
-  this.hp -= attackingCard.damage;
-  loseCondition();
-  return this.hp;
-}
-
-function loseCondition() {
-  if (newGame.players[0].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
-    // alert(newGame.players[0].name + " is dead");
-    alert("Player 1 is dead.");
-  } else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
-    // alert(newGame.players[1].name + " is dead");
-    alert("Player 2 is dead.");
-  }
-  return false;
-}
 
 function Board() {
   this.p1Deck = []; //each player has a generated and shuffled deck
@@ -38,12 +22,7 @@ function Board() {
   this.p2Graveyard = [];
 };
 
-function Player(input) {
-  this.name = input;
-  this.hp = 10;
-};
-
-function Card(damage, health, name, ability, text, flavor){
+function Card(damage, health, name, ability, text, flavor, monsterNumber){
 
   this.damage = damage;
   this.health = health;
@@ -51,11 +30,8 @@ function Card(damage, health, name, ability, text, flavor){
   this.ability = "";
   this.abilityText = "";
   this.flavorText= "flavor";
+  this.image = "img/monster" + monsterNumber + ".jpg"
 
-  cardRepo.push(this);
-};
-
-Card.prototype.fillCardRepo = function () {
   cardRepo.push(this);
 };
 
@@ -76,18 +52,18 @@ Game.prototype.startGame = function (input1, input2) {
   }
 
   var tauntAbility;
-  var monster3 = new Card(1, 1, 'Shub-Neggurath', sharedAbility, "When you play this minion, your opponent draws a card.", 'Tentacley Speaking, your baby sucks');
-  var monster2 = new Card(1, 1, 'Kassogtha', sharedAbility, "When you play this minion, your opponent draws a card.", 'When eating Humans, start with the eyelids so they have to watch');
-  var monster1 = new Card(1, 1, 'Sheograth', sharedAbility, "When you play this minion, your opponent draws a card.", 'Korn was my side project');
-  var monster4 = new Card(1, 1, 'Gug', sharedAbility, "When you play this minion, your opponent draws a card.", 'I smell children, I smell liver, humans humans please deliver');
-  var monster5 = new Card(2, 2, 'Azaezel', sharedAbility, "When you play this minion, your opponent draws a card.", 'I going to wear you like a slipper');
-  var monster6 = new Card(2,2, 'Parus-Hellton', sharedAbility, "When you play this minion, your opponent draws a card.", "That's Hawt!")
-  var monster7 = new Card(2,4, 'Jankum-Jenkins', tauntAbility, "Taunting allows monster to block an additonal creature", "What are you doing with that wolf bat?");
-  var monster8 = new Card(2,4, 'Sir Hossius', tauntAbility, "Taunting allows monster to block an additonal creature", "No longer the life of the party");
-  var monster11 = new Card(3,4, 'Kirraxus', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For I am become death");
-  var monster10 = new Card(3,4, 'Attraxia', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "Roar?");
-  // var monster9 = new Card(3,4, 'Unnamable-Spawn', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For the Angel of Death spread his wings on the blast,And breathed in the face of the foe as he passed;And the eyes of the sleepers waxed deadly and chill And their hearts but once heaved, and for ever grew still!");
-  // var monster13 = new Card(3,4, 'Epthelius', bleedAbility, "Taunting allows monster to block an additonal creature", "And in thy Silence was his Sentence, And in his Soul a vain repentance, ");
+  var monster3 = new Card(1, 1, 'Shub-Neggurath', sharedAbility, "When you play this minion, your opponent draws a card.", 'Tentacley Speaking, your baby sucks', 3);
+  var monster2 = new Card(1, 1, 'Kassogtha', sharedAbility, "When you play this minion, your opponent draws a card.", 'When eating Humans, start with the eyelids so they have to watch', 2);
+  var monster1 = new Card(1, 1, 'Sheograth', sharedAbility, "When you play this minion, your opponent draws a card.", 'Korn was my side project', 1);
+  var monster4 = new Card(1, 1, 'Gug', sharedAbility, "When you play this minion, your opponent draws a card.", 'I smell children, I smell liver, humans humans please deliver', 4);
+  var monster5 = new Card(2, 2, 'Azaezel', sharedAbility, "When you play this minion, your opponent draws a card.", 'I going to wear you like a slipper', 5);
+  var monster6 = new Card(2,2, 'Parus-Hellton', sharedAbility, "When you play this minion, your opponent draws a card.", "That's Hawt!", 6)
+  var monster7 = new Card(2,4, 'Jankum-Jenkins', tauntAbility, "Taunting allows monster to block an additonal creature", "What are you doing with that wolf bat?", 7);
+  var monster8 = new Card(2,4, 'Sir Hossius', tauntAbility, "Taunting allows monster to block an additonal creature", "No longer the life of the party", 8);
+  var monster11 = new Card(3,4, 'Kirraxus', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For I am become death", 11);
+  var monster10 = new Card(3,4, 'Attraxia', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "Roar?", 10);
+  // var monster9 = new Card(3,4, 'Unnamable-Spawn', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For the Angel of Death spread his wings on the blast,And breathed in the face of the foe as he passed;And the eyes of the sleepers waxed deadly and chill And their hearts but once heaved, and for ever grew still!", 9);
+  // var monster13 = new Card(3,4, 'Epthelius', bleedAbility, "Taunting allows monster to block an additonal creature", "And in thy Silence was his Sentence, And in his Soul a vain repentance.", 13);
   //var impCard = new Card("Imp",  function() {forceDraw(newGame, newBoard)}, "When you play this minion, your opponent draws a card.");
 
   this.board.buildDeck(cardRepo);
@@ -96,6 +72,30 @@ Game.prototype.startGame = function (input1, input2) {
 
   this.board.p1Hand = this.board.p1Deck.splice((this.board.p1Deck.length-5), 4);
   this.board.p2Hand = this.board.p2Deck.splice((this.board.p2Deck.length-6), 5);
+};
+
+Game.prototype.drawCards = function () {
+  loseCondition();
+
+  if (this.activePlayer === 1) {
+    if (this.board.p1Hand.length < 8) {
+      var drawnCard = this.board.p1Deck.pop();
+      this.board.p1Hand.push(drawnCard);
+    } else {
+      var drawnCard = this.board.p1Deck.pop();
+      this.board.p1Graveyard.push(drawnCard);
+    }
+  } else if (this.activePlayer === 2) {
+    if (this.board.p2Hand.length < 8) {
+      var drawnCard = this.board.p2Deck.pop();
+      this.board.p2Hand.push(drawnCard);
+    } else {
+      var drawnCard = this.board.p2Deck.pop();
+      this.board.p2Graveyard.push(drawnCard);
+    }
+  } else {
+    alert("drawCard ERROR!");
+  }
 };
 
 Board.prototype.buildDeck = function (cardRepo) {
@@ -123,33 +123,6 @@ Board.prototype.shuffleCards = function (deck) {
   return deck;
 };
 
-Game.prototype.drawCards = function () {
-  // debugger
-  loseCondition();
-
-  if (this.activePlayer === 1) {
-    if (this.board.p1Hand.length < 8) {
-      var drawnCard = this.board.p1Deck.pop();
-      this.board.p1Hand.push(drawnCard);
-    } else {
-      var drawnCard = this.board.p1Deck.pop();
-      this.board.p1Graveyard.push(drawnCard);
-    }
-  } else if (this.activePlayer === 2) {
-    if (this.board.p2Hand.length < 8) {
-      var drawnCard = this.board.p2Deck.pop();
-      this.board.p2Hand.push(drawnCard);
-    } else {
-      var drawnCard = this.board.p2Deck.pop();
-      this.board.p2Graveyard.push(drawnCard);
-    }
-  } else {
-    console.log(this.activePlayer);
-     alert("drawCard ERROR!");
-  }
-};
-
-
 Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
   if (gameObj.activePlayer === 1) {
     var playedCard = this.p1Hand.splice(handIndex, 1);
@@ -162,7 +135,54 @@ Board.prototype.playCard = function (gameObj, handIndex, laneIndex) {
   }
 };
 
-forceDraw = function (gameObj) {
+Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1 and 2 are array locations from the player fields
+  var array1 = boardObj.p1Field;
+  var array2 = boardObj.p2Field;
+  var attacker = boardObj.p1Field[index];
+  var defender = boardObj.p2Field[index];
+  attacker.health = attacker.health - defender.damage;
+  defender.health = defender.health - attacker.damage;
+  if (attacker.health <= 0) {
+    var p1Dead = Board.p1Field[index];
+    Board.p1Field[index] = undefined;
+    boardObj.p1Graveyard.push(p1Dead);
+  }
+  if (defender.health <= 0) {
+    var p2Dead = Board.p2Field[index];
+    Board.p2Field[index] = undefined;
+    boardObj.p2Graveyard.push(p2Dead);
+  }
+};
+
+Player.prototype.damage = function(attackingCard) {
+  this.hp -= attackingCard.damage;
+  loseCondition();
+  return this.hp;
+}
+
+Card.prototype.fillCardRepo = function () {
+  cardRepo.push(this);
+};
+
+function loseCondition() {
+  if (newGame.players[0].hp <= 0 || newGame.board.p1Deck.length <= 0 ) {
+    // alert(newGame.players[0].name + " is dead");
+    alert("Player 1 is dead.");
+    showStart();
+  } else if (newGame.players[1].hp <= 0 || newGame.board.p2Deck.length <= 0 ) {
+    // alert(newGame.players[1].name + " is dead");
+    alert("Player 2 is dead.");
+    showStart();
+  }
+  return false;
+}
+
+function Player(input) {
+  this.name = input;
+  this.hp = 10;
+};
+
+function forceDraw (gameObj) {
   loseCondition();
   if (gameObj.activePlayer === 2) {
     if (gameObj.board.p1Hand.length < 8) {
@@ -191,26 +211,6 @@ forceDraw = function (gameObj) {
 
 };
 
-Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1 and 2 are array locations from the player fields
-  var array1 = boardObj.p1Field;
-  var array2 = boardObj.p2Field;
-  var attacker = boardObj.p1Field[index];
-  var defender = boardObj.p2Field[index];
-  attacker.health = attacker.health - defender.damage;
-  defender.health = defender.health - attacker.damage;
-  if (attacker.health <= 0) {
-    var p1Dead = Board.p1Field[index];
-    Board.p1Field[index] = undefined;
-    boardObj.p1Graveyard.push(p1Dead);
-  }
-  if (defender.health <= 0) {
-    var p2Dead = Board.p2Field[index];
-    Board.p2Field[index] = undefined;
-    boardObj.p2Graveyard.push(p2Dead);
-  }
-};
-
-
 function endTurn(gameObj) {
   // switch clickability
   if (gameObj.activePlayer === 1) {
@@ -223,57 +223,64 @@ function endTurn(gameObj) {
   // begin new active player turn
   // active player draws card
   gameObj.drawCards();
-  // console.log("active player = " + gameObj.activePlayer);
-  // console.log("p1 " + gameObj.board.p1Hand + " ps2 " + gameObj.board.p2Hand);
   gameObj.turnCount += 1;
   loseCondition();
-  // console.log("turn " + gameObj.turnCount);
 }
-var monsterTracker = 2; //this is for proto display reasons and starting with 2 inputted monsters
 
 
+//begin user interface
 //front end functions
 function showHandCards(gameObj) {
-
   var index1 = 0;
   var index2 = 0;
-
   $('#player-1-hand').empty();
   $('#player-2-hand').empty();
-
   gameObj.board.p1Hand.forEach(function(card) {
-    $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+    $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"'this.image'  \" flavor=\"'this.flavorText'\"></div>');
     index1++;
   });
-
   gameObj.board.p2Hand.forEach(function(card) {
-    $('#player-2-hand').append('<div id=\"p2' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
+    $('#player-2-hand').append('<div id=\"p2' + index2 +'\" class=\"hand-cards\"><img src=\"'this.image'  \" flavor=\"'this.flavorText'\"></div>');
     index2++;
   });
 };
 
-//begin user interface
+function changeBoard(brdIndex) {
+  var coordGrabber = brdIndex.split("");
+  coordGrabber = coordGrabber[2];
+  var card1 = newGame.board.p1Field[coordGrabber]
+  var card2 = newGame.board.p2Field[coordGrabber]
+  newGame.board.p1Graveyard.push(card1);
+  newGame.board.p2Graveyard.push(card2);
+  newGame.board.p1Field[coordGrabber] = undefined;
+  newGame.board.p2Field[coordGrabber] = undefined;
+}
+
 $(document).ready(function(){
+
+  $("#audio-toggle").click(function() {
+    $("#audio-toggle").toggleClass('music-on');
+    // setTimeout(function() {
+      if($("#audio-toggle").hasClass('music-on')) {
+        bgMusic.play();
+      } else {
+        $("#audio-toggle").removeClass('music-on');
+        bgMusic.pause();
+      }
+    // }, 50);
+  });
 
   $("#new-game").click(function() {
       newGame = new Game();
       newGame.startGame();
-      var index1 = 0;
-      var index2 = 0;
+      showHandCards(newGame);
       $('.p2field').each(function () {
         $(this).addClass('unclickable');
       });
       $('#player-2-hand').addClass('unclickable');
       $("#player-2-info .end-turn").addClass('hidden');
       $("#player-1-info").addClass("highlight");
-      newGame.board.p1Hand.forEach(function(card) {
-        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
-      });
-      newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p1' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index2++;
-      });
+      $("#player-2-info").addClass("small-fire");
       $('#new-game').hide();
   });
 
@@ -286,18 +293,16 @@ $(document).ready(function(){
       $('#player-2-hand').addClass('unclickable');
       $("#player-2-info .end-turn").addClass('hidden');
       $("#player-1-info").addClass("highlight");
+      $("#player-2-info").addClass("small-fire");
       $('.p1field').each(function () {
         $(this).removeClass('unclickable');
       });
       $('#player-1-hand').removeClass('unclickable');
       $("#player-1-info .end-turn").removeClass('hidden');
       $("#player-2-info").removeClass("highlight");
-      var index1 = 0;
+      $("#player-1-info").removeClass("small-fire");
       $('#player-1-hand').empty();
-      newGame.board.p1Hand.forEach(function(card) {
-        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
-      });
+      showHandCards(newGame);
 
     } else if (newGame.activePlayer === 2) {
       $('.p1field').each(function () {
@@ -306,18 +311,16 @@ $(document).ready(function(){
       $('#player-1-hand').addClass('unclickable');
       $("#player-1-info .end-turn").addClass('hidden');
       $("#player-2-info").addClass("highlight");
+      $("#player-1-info").addClass("small-fire");
       $('.p2field').each(function () {
         $(this).removeClass('unclickable');
       });
       $('#player-2-hand').removeClass('unclickable');
       $("#player-2-info .end-turn").removeClass('hidden');
       $("#player-1-info").removeClass("highlight");
-      var index2 = 0;
+      $("#player-2-info").removeClass("small-fire");
       $('#player-2-hand').empty();
-      newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p2' + index2 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index2++;
-      });
+      showHandCards(newGame);
     } else {
       alert("end turn interface error");
     }
@@ -341,38 +344,20 @@ $(document).on('click', '.board-lanes', function() {
    && ($(this).hasClass("p2field"))
     && ($(this).find("div").hasClass("field-cards"))
      && ($(".p1field").hasClass("active-field"))) {
-       // SORRY FOR THE CHEAT BIZ LOGIC WILL REFACTOR
-       var boardIndex = $(this).attr("id");
-       boardIndex = boardIndex.split("");
-       boardIndex = boardIndex[2];
-       var card1 = newGame.board.p1Field[boardIndex]
-       var card2 = newGame.board.p2Field[boardIndex]
-       console.log(card1);
-       newGame.board.p1Graveyard.push(card1);
-       newGame.board.p2Graveyard.push(card2);
-       newGame.board.p1Field[boardIndex] = undefined;
-       newGame.board.p2Field[boardIndex] = undefined;
+     var boardIndex = $(this).attr("id");
+     changeBoard(boardIndex);
       $(this).empty();
       $(".active-field").find(".field-cards").remove();
       $(".active-field").removeClass("active-field");
-       console.log("SUCCESS");
   } else if ((newGame.activePlayer == 2)
      && ($(this).hasClass("p1field"))
       && ($(this).find("div").hasClass("field-cards"))
        && ($(".p2field").hasClass("active-field"))) {
          var boardIndex = $(this).attr("id");
-         boardIndex = boardIndex.split("");
-         boardIndex = boardIndex[2];
-         var card1 = newGame.board.p1Field[boardIndex]
-         var card2 = newGame.board.p2Field[boardIndex]
-         newGame.board.p1Graveyard.push(card1);
-         newGame.board.p2Graveyard.push(card2);
-         newGame.board.p1Field[boardIndex] = undefined;
-         newGame.board.p2Field[boardIndex] = undefined;
+         changeBoard(boardIndex);
          $(this).empty();
          $(".active-field").find(".field-cards").remove();
          $(".active-field").removeClass("active-field");
-         console.log("SUCCESS");
   } else if ($(".board-lanes").hasClass("active-field")) {
     $(".board-lanes").each(function() {
       $(".board-lanes").removeClass("active-field");
@@ -387,7 +372,6 @@ $(document).on('click', '.board-lanes', function() {
     boardIndex = boardIndex[2];
     handIndexofCard = handIndexofCard.split("");
     handIndexofCard = handIndexofCard[2];
-    console.log(handIndexofCard);
     $(".active-card").addClass("field-cards");
     $(".active-card").removeClass("active-card hand-cards");
     forceDraw(newGame);
@@ -422,7 +406,6 @@ $(document).on('click', '.board-lanes', function() {
       console.log("else");
     }
 
-    console.log(newGame.board);
 // field circumstances
   // If you click on a field card that is already highlighted
   } else if ($(this).hasClass("active-field")) {
@@ -453,8 +436,6 @@ $(document).on('click', '.board-lanes', function() {
           $(".p1field").removeClass("unclickable");
         });
       }
-
-
 }
 });
 
@@ -475,3 +456,7 @@ $(document).on('click', '.player-icons', function() {
     console.log("Nothing happens...");
   }
 });
+
+function showStart() {
+  $("#new-game").show();
+}
