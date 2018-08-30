@@ -51,6 +51,7 @@ function Card(damage, health, name, ability, text, flavor){
   this.ability = "";
   this.abilityText = "";
   this.flavorText= "flavor";
+  this.bleeding = false;
 
   cardRepo.push(this);
 };
@@ -67,8 +68,8 @@ Game.prototype.startGame = function (input1, input2) {
   this.players.push(player2);
   this.board = new Board();
 
-  var bleedAbility = function() {
-
+  var bleedAbility = function(attacker,defender) {
+     alert(attacker.ability)
   };
 
   var sharedAbility = function() {
@@ -93,8 +94,7 @@ Game.prototype.startGame = function (input1, input2) {
   this.board.buildDeck(cardRepo);
   this.board.shuffleCards(this.board.p1Deck);
   this.board.shuffleCards(this.board.p2Deck);
-
-  this.board.p1Hand = this.board.p1Deck.splice((this.board.p1Deck.length-5), 4);
+    this.board.p1Hand = this.board.p1Deck.splice((this.board.p1Deck.length-5), 4);
   this.board.p2Hand = this.board.p2Deck.splice((this.board.p2Deck.length-6), 5);
 };
 
@@ -196,6 +196,7 @@ Board.prototype.monsterFight = function (boardObj, index1, index2) { //indices 1
   var array2 = boardObj.p2Field;
   var attacker = boardObj.p1Field[index];
   var defender = boardObj.p2Field[index];
+  bleedAbility(attacker,defender);
   attacker.health = attacker.health - defender.damage;
   defender.health = defender.health - attacker.damage;
   if (attacker.health <= 0) {
@@ -254,6 +255,14 @@ function showHandCards(gameObj) {
 
 //begin user interface
 $(document).ready(function(){
+
+  $("#!@#!@#!@#!@#!@#!@#!@#!@#!@#!@#!@#buttonname").click(Function() {
+  var p1NameInput = $('!@#!@#!@#!@#!@#!@#').val()
+  var p2NameInput = $('!@#!@#!@#!@#!@#!@#').Val()
+  $("#p1NameField").append(" " + p1NameInput.toUpperCase());
+  $("#p2NameField").append(" " + p2NameInput.toUpperCase());
+  });
+
 
   $("#new-game").click(function() {
       newGame = new Game();
@@ -450,13 +459,11 @@ $(document).on('click', '.board-lanes', function() {
     } else if (newGame.activePlayer == 2) {
         $(this).addClass("active-field");
         $(".p1field").each(function() {
-          $(".p1field").removeClass("unclickable");
+        $(".p1field").removeClass("unclickable");
         });
       }
-
-
-}
-});
+    }
+  });
 
 $(document).on('click', '.player-icons', function() {
   if (($(this).attr("id") == "player-2-deck") && (newGame.activePlayer == 1) && ($('.p1field').hasClass("active-field"))) {
