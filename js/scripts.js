@@ -29,7 +29,7 @@ function Card(damage, health, name, ability, text, flavor, monsterNumber){
   this.ability = "";
   this.abilityText = "";
   this.flavorText= "flavor";
-  this.image = "img/monster" + monsterNumber + ".png"
+  this.image = "img/monster" + monsterNumber + ".png";
 
   cardRepo.push(this);
 };
@@ -56,11 +56,11 @@ Game.prototype.startGame = function (input1, input2) {
   var monster1 = new Card(1, 1, 'Sheograth', sharedAbility, "When you play this minion, your opponent draws a card.", 'Korn was my side project', 1);
   var monster4 = new Card(1, 1, 'Gug', sharedAbility, "When you play this minion, your opponent draws a card.", 'I smell children, I smell liver, humans humans please deliver', 4);
   var monster5 = new Card(2, 2, 'Azaezel', sharedAbility, "When you play this minion, your opponent draws a card.", 'I going to wear you like a slipper', 5);
-  var monster6 = new Card(2,2, 'Parus-Hellton', sharedAbility, "When you play this minion, your opponent draws a card.", "That's Hawt!", 6)
-  var monster7 = new Card(2,4, 'Jankum-Jenkins', tauntAbility, "Taunting allows monster to block an additonal creature", "What are you doing with that wolf bat?", 7);
-  var monster8 = new Card(2,4, 'Sir Hossius', tauntAbility, "Taunting allows monster to block an additonal creature", "No longer the life of the party", 8);
-  var monster11 = new Card(3,4, 'Kirraxus', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For I am become death", 11);
-  var monster10 = new Card(3,4, 'Attraxia', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "Roar?", 10);
+  // var monster6 = new Card(2,2, 'Parus-Hellton', sharedAbility, "When you play this minion, your opponent draws a card.", "That's Hawt!", 6);
+  // var monster7 = new Card(2,4, 'Jankum-Jenkins', tauntAbility, "Taunting allows monster to block an additonal creature", "What are you doing with that wolf bat?", 7);
+  // var monster8 = new Card(2,4, 'Sir Hossius', tauntAbility, "Taunting allows monster to block an additonal creature", "No longer the life of the party", 8);
+  // var monster11 = new Card(3,4, 'Kirraxus', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For I am become death", 11);
+  // var monster10 = new Card(3,4, 'Attraxia', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "Roar?", 10);
   // var monster9 = new Card(3,4, 'Unnamable-Spawn', bleedAbility, "creatures attcked by this monster suffer an additional damage next round", "For the Angel of Death spread his wings on the blast,And breathed in the face of the foe as he passed;And the eyes of the sleepers waxed deadly and chill And their hearts but once heaved, and for ever grew still!", 9);
   // var monster13 = new Card(3,4, 'Epthelius', bleedAbility, "Taunting allows monster to block an additonal creature", "And in thy Silence was his Sentence, And in his Soul a vain repentance.", 13);
   //var impCard = new Card("Imp",  function() {forceDraw(newGame, newBoard)}, "When you play this minion, your opponent draws a card.");
@@ -234,15 +234,16 @@ function showHandCards(gameObj) {
   var index2 = 0;
   $('#player-1-hand').empty();
   $('#player-2-hand').empty();
+
   gameObj.board.p1Hand.forEach(function(card) {
-    $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"'this.image'  \" flavor=\"'this.flavorText'\"></div>');
+    $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"' + card.image + '\" flavor=\"' + card.flavorText + '\"></div>');
     index1++;
-  });
+  })
   gameObj.board.p2Hand.forEach(function(card) {
-    $('#player-2-hand').append('<div id=\"p2' + index2 +'\" class=\"hand-cards\"><img src=\"'this.image'  \" flavor=\"'this.flavorText'\"></div>');
+    $('#player-2-hand').append('<div id=\"p2' + index2 +'\" class=\"hand-cards\"><img src=\"' + card.image + '\" flavor=\"' + card.flavorText + '\"></div>');
     index2++;
-  });
-};
+  })
+}
 
 function changeBoard(brdIndex) {
   var coordGrabber = brdIndex.split("");
