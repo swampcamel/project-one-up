@@ -340,24 +340,29 @@ $(document).on('click', '.hand-cards', function() {
 });
 
 $(document).on('click', '.board-lanes', function() {
+
   if ((newGame.activePlayer == 1)
    && ($(this).hasClass("p2field"))
     && ($(this).find("div").hasClass("field-cards"))
      && ($(".p1field").hasClass("active-field"))) {
-     var boardIndex = $(this).attr("id");
-     changeBoard(boardIndex);
-      $(this).empty();
-      $(".active-field").find(".field-cards").remove();
-      $(".active-field").removeClass("active-field");
+
+    var boardIndex = $(this).attr("id");
+    changeBoard(boardIndex);
+    $(this).empty();
+    $(".active-field").find(".field-cards").remove();
+    $(".active-field").removeClass("active-field");
+
   } else if ((newGame.activePlayer == 2)
      && ($(this).hasClass("p1field"))
       && ($(this).find("div").hasClass("field-cards"))
        && ($(".p2field").hasClass("active-field"))) {
-         var boardIndex = $(this).attr("id");
-         changeBoard(boardIndex);
-         $(this).empty();
-         $(".active-field").find(".field-cards").remove();
-         $(".active-field").removeClass("active-field");
+
+    var boardIndex = $(this).attr("id");
+    changeBoard(boardIndex);
+    $(this).empty();
+    $(".active-field").find(".field-cards").remove();
+    $(".active-field").removeClass("active-field");
+
   } else if ($(".board-lanes").hasClass("active-field")) {
     $(".board-lanes").each(function() {
       $(".board-lanes").removeClass("active-field");
@@ -366,45 +371,38 @@ $(document).on('click', '.board-lanes', function() {
 // active hand circumstance
   if (($(".hand-cards").hasClass("active-card"))) {
     $(".active-card").appendTo(this);
+
     var handIndexofCard = $(".active-card").attr("id");
     var boardIndex = $(this).attr("id");
+
     boardIndex = boardIndex.split("");
     boardIndex = boardIndex[2];
     handIndexofCard = handIndexofCard.split("");
     handIndexofCard = handIndexofCard[2];
+
     $(".active-card").addClass("field-cards");
     $(".active-card").removeClass("active-card hand-cards");
+
     forceDraw(newGame);
-    showHandCards(newGame);
+
     $(this).addClass("unclickable");
 
     if (newGame.activePlayer == 1) {
       var activeCard = newGame.board.p1Hand.splice(handIndexofCard, 1);
       var activeCard = activeCard[0];
       var index1 = 0;
-      $('#player-1-hand').empty();
-
-      newGame.board.p1Hand.forEach(function(card) {
-        $('#player-1-hand').append('<div id=\"p1' + index1 +'\" class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>');
-        index1++;
-      });
       newGame.board.p1Field[boardIndex] = activeCard;
 
     } else if (newGame.activePlayer == 2) {
       var activeCard = newGame.board.p2Hand.splice(handIndexofCard, 1);
       var activeCard = activeCard[0];
       var index2 = 0;
-      $('#player-2-hand').empty();
-      newGame.board.p2Hand.forEach(function(card) {
-        $('#player-2-hand').append('<div id=\"p2' + index2 +'\"  class=\"hand-cards\"><img src=\"img/card-frame_180-res-alt.png\"></div>'); //previously "p1' + index
-        index2++; //previously index1
-      });
-
       newGame.board.p2Field[boardIndex] = activeCard;
 
     } else {
       console.log("else");
     }
+    showHandCards(newGame);
 
 // field circumstances
   // If you click on a field card that is already highlighted
