@@ -286,6 +286,8 @@ $(document).ready(function(){
 
   $(".end-turn").click(function(){
     endTurn(newGame);
+    $('.p1field').removeClass("sleeping");
+    $('.p2field').removeClass("sleeping");
     if (newGame.activePlayer === 1) {
       $('.p2field').each(function () {
         $(this).addClass('unclickable');
@@ -313,7 +315,7 @@ $(document).ready(function(){
       $("#player-2-info").addClass("highlight");
       $("#player-1-info").addClass("small-fire");
       $('.p2field').each(function () {
-        $(this).removeClass('unclickable');
+        $(this).removeClass('unclickable sleeping');
       });
       $('#player-2-hand').removeClass('unclickable');
       $("#player-2-info .end-turn").removeClass('hidden');
@@ -331,11 +333,15 @@ $(document).ready(function(){
 $(document).on('click', '.hand-cards', function() {
   if ($(this).hasClass("active-card")) {
     $(this).removeClass("active-card")
+
   } else {
     $(".hand-cards").each(function() {
       $(".hand-cards").removeClass("active-card");
     });
     $(this).addClass("active-card");
+    $(".field-cards").each(function() {
+      $(".field-cards").parent().addClass("unclickable");
+    });
   }
 });
 
@@ -385,20 +391,21 @@ $(document).on('click', '.board-lanes', function() {
 
     forceDraw(newGame);
 
-    $(this).addClass("unclickable");
+    $(this).addClass("sleeping");
 
     if (newGame.activePlayer == 1) {
       var activeCard = newGame.board.p1Hand.splice(handIndexofCard, 1);
       var activeCard = activeCard[0];
       var index1 = 0;
       newGame.board.p1Field[boardIndex] = activeCard;
+      $(".p1field").removeClass("unclickable");
 
     } else if (newGame.activePlayer == 2) {
       var activeCard = newGame.board.p2Hand.splice(handIndexofCard, 1);
       var activeCard = activeCard[0];
       var index2 = 0;
       newGame.board.p2Field[boardIndex] = activeCard;
-
+      $(".p2field > .field-cards").removeClass("unclickable");
     } else {
       console.log("else");
     }

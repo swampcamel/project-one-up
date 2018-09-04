@@ -278,6 +278,10 @@ html, body {
   pointer-events: none;
 }
 
+.sleeping {
+  pointer-events: none;
+}
+
 .field-cards {
   /* reserved for future styling of lanes */
  }
