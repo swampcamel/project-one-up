@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>ONE-LANDING</title>
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/css/materialize.min.css">
+  <link href="css/landing-styles.css" rel="stylesheet" type="text/css">
+  <script src="js/jquery-3.3.1.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/1.0.0-rc.2/js/materialize.min.js"></script>
+  <script src="js/landing-scripts.js"></script>
+  <link href="https://fonts.googleapis.com/css?family=Amatic+SC|Cinzel|Tangerine" rel="stylesheet">
+</head>
+
+<body>
+  <div class="landing-page">
+    <div class="logo">
+      <img id="logo" src="img/landing-assets/logo.png">
+    </div>
+    <div class="banner">
+      <img id="banner" class="banner" src="img/landing-assets/banner.png">
+    </div>
+    <div class="banner-blank">
+      <img id="banner-blank" class="banner" src="img/landing-assets/banner-blank.png">
+    </div>
+    <div class="clouds"></div>
+    <div class="twinkling"></div>
+    <div class="stars"></div>
+    <div id="names-input">
+      <div class="row">
+      <form class="col s12">
+        <div class="row">
+          <div class="input-field col s6">
+            <textarea id="player-1-input" class="materialize-textarea"></textarea>
+            <label for="player-1-input">Player 1</label>
+          </div>
+          <div class="input-field col s6">
+            <textarea id="player-2-input" class="materialize-textarea"></textarea>
+            <label for="player-2-input">Player 2</label>
+          </div>
+        </div>
+        <a id="confirm-button" type="submit" class="waves-effect waves-light pink darken-4 btn">Confirm</a>
+      </form>
+      </div>
+    </div>
+    <div class="landing-button">
+      <a id="play-button" class="waves-effect waves-light pink darken-4 btn">Play</a>
+    </div>
+  </div>
+</body>
+</html>
